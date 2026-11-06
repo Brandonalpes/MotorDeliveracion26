@@ -94,6 +94,28 @@ public class MotorDeliberacion {
     //TODO: Implementar la funcionalidad de consultar los argumentos de un usuario específico en el debate.
     }
 
+    /**
+     * Calcula la polarización de todos los nodos del debate.
+     * La polarización se define como la cantidad de argumentos a favor y en contra que existen en el subárbol que tiene como raíz cada nodo.
+     * @throws IllegalStateException si no hay un debate activo.
+     * @return Un diccionario cuya clave es el ID del nodo y el valor es un diccionario con la polarización: 
+     * "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
+     */
+    public DiccionarioHashAbierto<String,DiccionarioHashAbierto<String,Integer>> calcularPolarizacionDebate(){
+        //TODO
+    }
+
+     /**
+    * Calcula la polarización de un nodo específico en el árbol de debate.
+    * La polarización se define como la cantidad de argumentos a favor y en contra que existen en el subárbol que tiene como raíz el nodo especificado por idNodo.
+    * @throws IllegalStateException si no hay un debate activo. 
+    * @param idNodo : Identificador del nodo para el cual se desea calcular la polarización.
+    * @return Un DiccionarioHashAbierto<String,Integer> que contiene la polarización del nodo, con las claves "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
+    */
+    public DiccionarioHashAbierto<String,Integer> calcularPolarizacionNodo(String idNodo){
+        //TODO
+
+    }
  /*** Mostrar árbol por consola ***/
  
     /**
