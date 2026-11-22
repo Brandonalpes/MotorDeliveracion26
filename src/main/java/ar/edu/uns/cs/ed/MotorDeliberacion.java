@@ -1,6 +1,5 @@
 package ar.edu.uns.cs.ed;
 
-import java.util.Iterator;
 import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
@@ -81,18 +80,18 @@ public class MotorDeliberacion {
         // desapilo antes porque clearDebate reinicia la pila
         Operaciones opActual = historial.pop();
 
-        if (opActual.operacion == 1) {
+        if (opActual.getOperacion() == 1) {
             clearDebate();
-            return "Se deshizo CREAR_DEBATE: " + opActual.id;
+            return "Se deshizo CREAR_DEBATE: " + opActual.getId();
         }
 
-        Position<Opinion> pos = nodos.get(opActual.id);
+        Position<Opinion> pos = nodos.get(opActual.getId());
         if (pos == null) {
-            throw new IllegalStateException("No se pudo deshacer la operación POSTEAR: " + opActual.id);
+            throw new IllegalStateException("No se pudo deshacer la operación POSTEAR: " + opActual.getId());
         }
 
         borrarSubarbol(pos);
-        return "Se deshizo POSTEAR: " + opActual.id;
+        return "Se deshizo POSTEAR: " + opActual.getId();
     }
 /**
  * Crea un nuevo debate con un argumento raíz.
@@ -194,7 +193,7 @@ public class MotorDeliberacion {
             throw new IllegalArgumentException("no existe ese posteo");
         }
 
-        if (!p.element().getUsuario().getId().equals(idUsuario.trim())) {
+        if (!p.element().getUsuario().getId().trim().equals(idUsuario.trim())) {
             throw new IllegalStateException("solo el autor puede eliminar");
         }
 
@@ -212,22 +211,22 @@ public class MotorDeliberacion {
         PositionList<Position<Opinion>> listaPos = new ListaDoblementeEnlazada<Position<Opinion>>();
         obtenerIdsYPosicionesSubarbol(raizSub, listaIds, listaPos);
 
-        Iterator<String> itIds = listaIds.iterator();
-        Iterator<Position<Opinion>> itPos = listaPos.iterator();
-
-        while (itIds.hasNext()) {
-            String idAct = itIds.next();
-            Position<Opinion> posAct = itPos.next();
+        for (Position<Opinion> posAct : listaPos) {
+            String idAct = posAct.element().getIdArgumento();
             String idUsr = posAct.element().getUsuario().getId().trim();
-
             PositionList<Opinion> listaUsr = opinionesDe.get(idUsr);
             Position<Opinion> posEnLista = lugarEnUsuario.remove(idAct);
-            if(listaUsr != null && posEnLista != null) {
+            if (listaUsr != null && posEnLista != null) {
                 listaUsr.remove(posEnLista);
+                if (listaUsr.isEmpty()) {
+                    opinionesDe.remove(idUsr);
+                }
             }
-
-            nodos.remove(idAct);
             arbol.removeExternalNode(posAct);
+        }
+
+        for (String idAct : listaIds) {
+            nodos.remove(idAct);
         }
     }
 
@@ -279,7 +278,7 @@ public class MotorDeliberacion {
         int i = 1;
         while (!aux.isEmpty()) {
             Operaciones op = aux.pop();
-            System.out.println(i + ") " + op.detalle + " - " + op.id);
+            System.out.println(i + ") " + op.getDetalle() + " - " + op.getId());
             historial.push(op);
             i++;
         }
