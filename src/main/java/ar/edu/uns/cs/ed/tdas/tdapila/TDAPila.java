@@ -35,9 +35,11 @@ public class TDAPila<E> implements Stack<E> {
     @Override
     public void push(E element) {
         if (size == pila.length) {
-            reOrdenar();
+            reOrdenar(pila);
+            pila[size] = element;
+        } else {
+            pila[size] = element;
         }
-        pila[size] = element;
         size++;
     }
 
@@ -53,7 +55,7 @@ public class TDAPila<E> implements Stack<E> {
         return aux;
     }
 
-    private void reOrdenar() {
+    private void reOrdenar(E[] pila) {
         E[] nuevaPila = (E[]) new Object[pila.length * 2];
         for (int i = 0; i < pila.length; i++) {
             nuevaPila[i] = pila[i];
