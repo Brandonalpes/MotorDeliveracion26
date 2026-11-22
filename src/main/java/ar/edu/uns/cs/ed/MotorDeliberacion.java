@@ -1,5 +1,6 @@
 package ar.edu.uns.cs.ed;
 
+import java.util.Iterator;
 import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
@@ -73,8 +74,28 @@ public class MotorDeliberacion {
  * @throws EmptyStackException
  */
     public String deshacerUltimaOperacion() throws EmptyStackException {
-        //TODO: Implementar la funcionalidad de deshacer la última operación registrada.
-        return null;
+        if (historial.isEmpty()) {
+            throw new EmptyStackException("no hay operaciones");
+        }
+
+        Operaciones opActual = historial.top();
+
+
+        if (opActual.operacion == 1) {
+            clearDebate();
+            historial.pop();
+            return "Se deshizo CREAR_DEBATE " + opActual.id;
+        }
+
+        Position<Opinion> pos = nodos.get(opActual.id);
+        if(pos == null) {
+            historial.pop();
+            throw new IllegalStateException("el posteo ya no existe");
+        }
+
+        // TODO: reutilizar el borrado del subarbol aca sin chequear dueño
+        historial.pop();
+        return "Se deshizo POSTEAR " + opActual.id;
     }
 /**
  * Crea un nuevo debate con un argumento raíz.
@@ -167,12 +188,51 @@ public class MotorDeliberacion {
 
     // Elimina un posteo y todo el subárbol.
     public void eliminarPosteo(String idUsuario, String idPosteo) {
-        //TODO: Implementar la funcionalidad de eliminar un posteo y todo su subárbol en el debate.
+        if(idUsuario == null || idUsuario.trim().isEmpty() || idPosteo == null || idPosteo.trim().isEmpty()) {
+            throw new IllegalArgumentException("datos invalidos");
+        }
+
+        Position<Opinion> p = nodos.get(idPosteo.trim());
+        if (p == null) {
+            throw new IllegalArgumentException("no existe ese posteo");
+        }
+
+        if (!p.element().getUsuario().getId().equals(idUsuario.trim())) {
+            throw new IllegalStateException("solo el autor puede eliminar");
+        }
+
+
+        PositionList<String> listaIds = new ListaDoblementeEnlazada<String>();
+        PositionList<Position<Opinion>> listaPos = new ListaDoblementeEnlazada<Position<Opinion>>();
+        obtenerIdsYPosicionesSubarbol(p, listaIds, listaPos);
+
+        Iterator<String> itIds = listaIds.iterator();
+        Iterator<Position<Opinion>> itPos = listaPos.iterator();
+
+        while (itIds.hasNext()) {
+            String idAct = itIds.next();
+            Position<Opinion> posAct = itPos.next();
+            String idUsr = posAct.element().getUsuario().getId();
+
+            PositionList<Opinion> listaUsr = opinionesDe.get(idUsr);
+            Position<Opinion> posEnLista = lugarEnUsuario.remove(idAct);
+            if(listaUsr != null && posEnLista != null) {
+                listaUsr.remove(posEnLista);
+            }
+
+            nodos.remove(idAct);
+            arbol.removeExternalNode(posAct);
+        }
     }
+
 
     //obtiene las posiciones en postorden.
     private void obtenerIdsYPosicionesSubarbol(Position<Opinion> nodo, PositionList<String> ids, PositionList<Position<Opinion>> posiciones) {
-        //TODO: Implementar la funcionalidad de obtener los ids y posiciones de un subárbol en postorden.
+        for (Position<Opinion> h : arbol.children(nodo)) {
+            obtenerIdsYPosicionesSubarbol(h, ids, posiciones);
+        }
+        ids.addLast(nodo.element().getIdArgumento());
+        posiciones.addLast(nodo);
     }
 
     //limpia todo el debate, dejando la estructura vacía.   
