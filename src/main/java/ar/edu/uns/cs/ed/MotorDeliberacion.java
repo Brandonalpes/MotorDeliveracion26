@@ -293,8 +293,38 @@ public class MotorDeliberacion {
      * "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
      */
     public DiccionarioHashAbierto<String,DiccionarioHashAbierto<String,Integer>> calcularPolarizacionDebate(){
-        // TODO: falta armarlo en una pasada postorden para que quede en O(n)
-        return null;
+        if (arbol.isEmpty()) {
+            throw new IllegalStateException("no hay debate");
+        }
+        DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>> dicGeneral = new DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>>();
+
+        polarizacionDebateRec(arbol.root(), dicGeneral);
+        return dicGeneral;
+    }
+
+    private int[] polarizacionDebateRec(Position<Opinion> v,
+            DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>> dicGeneral) {
+        int[] r = new int[2];
+
+        for (Position<Opinion> h : arbol.children(v)) {
+            int[] rh = polarizacionDebateRec(h, dicGeneral);
+            r[0] += rh[0];
+            r[1] += rh[1];
+        }
+
+        String post = v.element().getPostura();
+        if (post.equals("AFAVOR")) {
+            r[0]++;
+        } else if (post.equals("ENCONTRA")) {
+            r[1]++;
+        }
+
+        DiccionarioHashAbierto<String, Integer> dicNodo = new DiccionarioHashAbierto<String, Integer>();
+        dicNodo.insert("AFAVOR", r[0]);
+        dicNodo.insert("ENCONTRA", r[1]);
+
+        dicGeneral.insert(v.element().getIdArgumento(), dicNodo);
+        return r;
     }
 
      /**
@@ -305,7 +335,10 @@ public class MotorDeliberacion {
     * @return Un DiccionarioHashAbierto<String,Integer> que contiene la polarización del nodo, con las claves "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
     */
     public DiccionarioHashAbierto<String,Integer> calcularPolarizacionNodo(String idNodo){
-        if (idNodo == null) {
+        if (arbol.isEmpty()) {
+            throw new IllegalStateException("no hay debate");
+        }
+        if (idNodo == null || idNodo.trim().isEmpty()) {
             throw new IllegalArgumentException("id invalido");
         }
 
@@ -315,7 +348,6 @@ public class MotorDeliberacion {
         }
 
         int[] cont = contarPol(p);
-        // System.out.println(idNodo + " -> " + cont[0] + " / " + cont[1]);
 
         DiccionarioHashAbierto<String, Integer> res = new DiccionarioHashAbierto<String, Integer>();
         res.insert("AFAVOR", cont[0]);
