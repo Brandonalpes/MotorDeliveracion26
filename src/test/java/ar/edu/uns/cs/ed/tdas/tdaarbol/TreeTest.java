@@ -1,7 +1,7 @@
 
-package ar.edu.uns.cs.ed.tdas.tdaarbol;
-import static org.junit.Assert.*;
+package test.java.ar.edu.uns.cs.ed.tdas.tdaarbol;
 
+import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
@@ -15,7 +15,6 @@ import ar.edu.uns.cs.ed.tdas.excepciones.*;
 import ar.edu.uns.cs.ed.tdas.tdacola.*;
 import ar.edu.uns.cs.ed.tdas.tdalista.*;
 
-
 public class TreeTest {
 
 	private Tree<Integer> tree; // interface
@@ -25,7 +24,8 @@ public class TreeTest {
 	 */
 	private Tree<Integer> getTree() {
 		Tree<Integer> t = null;
-		//t = new Arbol<Integer>(); //TODO: Descomentar y crear instancia del TDA a testear
+		// t = new Arbol<Integer>(); //TODO: Descomentar y crear instancia del TDA a
+		// testear
 		return t;
 	}
 
@@ -34,7 +34,8 @@ public class TreeTest {
 	 */
 	private <E> Queue<E> getAuxQueue() {
 		Queue<E> q = null;
-		//q = new ArrayQueue<E>(); //TODO: Descomentar y crear instancia de Queue<E> auxiliar
+		// q = new ArrayQueue<E>(); //TODO: Descomentar y crear instancia de Queue<E>
+		// auxiliar
 		return q;
 	}
 
@@ -43,13 +44,14 @@ public class TreeTest {
 	 */
 	private <E> PositionList<E> getAuxPositionList() {
 		PositionList<E> l = null;
-		//l = new ListaDoblementeEnlazada<E>(); //TODO: Descomentar y crear instancia de PositionList<E> auxiliar
+		// l = new ListaDoblementeEnlazada<E>(); //TODO: Descomentar y crear instancia
+		// de PositionList<E> auxiliar
 		return l;
 	}
 
 	@Before
 	public void setUp() {
-		tree = getTree(); 
+		tree = getTree();
 		Assume.assumeNotNull(tree, getAuxQueue(), getAuxPositionList());
 	}
 
@@ -873,7 +875,9 @@ public class TreeTest {
 			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		} catch (InvalidOperationException e1) {
 			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
-		} catch (EmptyListException e1){fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [PROBLEMA EN TDALISTA]");}
+		} catch (EmptyListException e1) {
+			fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [PROBLEMA EN TDALISTA]");
+		}
 
 	}
 
@@ -993,7 +997,9 @@ public class TreeTest {
 			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		} catch (InvalidOperationException e1) {
 			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
-		} catch (EmptyListException e1){fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [PROBLEMA EN TDALISTA]");}
+		} catch (EmptyListException e1) {
+			fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [PROBLEMA EN TDALISTA]");
+		}
 
 	}
 
@@ -1112,18 +1118,23 @@ public class TreeTest {
 		// Raíz con 1 solo hijo
 		tree = getTree();
 		cargarArbol3(tree);
-		Position<Integer> raiz=null, hijo=null;
-		try{
-		raiz=tree.root();
-		hijo= tree.children(tree.root()).iterator().next();
-		}catch (EmptyTreeException e){fail("children() debería lanzar una excepción EmptyTreeException cuando el árbol no está vacío");}
-		 catch (InvalidPositionException e){fail("children() no debería lanzar una excepción InvalidPositionException para una posición válida");}
-		try{
+		Position<Integer> raiz = null, hijo = null;
+		try {
+			raiz = tree.root();
+			hijo = tree.children(tree.root()).iterator().next();
+		} catch (EmptyTreeException e) {
+			fail("children() debería lanzar una excepción EmptyTreeException cuando el árbol no está vacío");
+		} catch (InvalidPositionException e) {
+			fail("children() no debería lanzar una excepción InvalidPositionException para una posición válida");
+		}
+		try {
 			tree.removeInternalNode(raiz);
-			raiz=tree.parent(hijo);
+			raiz = tree.parent(hijo);
 			fail("El método parent debería haber lanzado la excepción BoundaryViolationException al intentar eliminar la raíz del árbol.");
-		}catch(InvalidPositionException e){fail("El método removeInternalNode no debería lanzar esta excepción al intentar eliminar la raíz de un árbol cuando esta tiene un solo hijo.");
-	    }catch(BoundaryViolationException e){}
+		} catch (InvalidPositionException e) {
+			fail("El método removeInternalNode no debería lanzar esta excepción al intentar eliminar la raíz de un árbol cuando esta tiene un solo hijo.");
+		} catch (BoundaryViolationException e) {
+		}
 		// Raiz sin hijos.
 		try {
 			tree = getTree();
@@ -1233,7 +1244,9 @@ public class TreeTest {
 			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (BoundaryViolationException e) {
 			fail("prev() no debería lanzar la excepción BoundaryViolationException con una posición .");
-		} catch (EmptyListException e1){fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [PROBLEMA EN TDALISTA]");}
+		} catch (EmptyListException e1) {
+			fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [PROBLEMA EN TDALISTA]");
+		}
 
 	}
 
@@ -1378,8 +1391,8 @@ public class TreeTest {
 			fail("Al invocar createRoot() con un árbol vacío lanza la excepción InvalidOperationException");
 		}
 
-	}	
-	
+	}
+
 	private void cargarArbol3(Tree<Integer> Arbol) {
 		Position<Integer> h1;
 		h1 = null;
@@ -1387,7 +1400,7 @@ public class TreeTest {
 			Arbol.createRoot(1);
 			h1 = Arbol.addFirstChild(Arbol.root(), 2);
 			Arbol.addFirstChild(h1, 6);
-		
+
 		} catch (InvalidPositionException e) {
 			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posición válida lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {

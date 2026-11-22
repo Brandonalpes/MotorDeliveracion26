@@ -1,4 +1,4 @@
-package ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
+package test.java.ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -40,12 +40,15 @@ public class BinaryTreeTests {
 	 */
 	@Before
 	public void setUp() {
-		//binaryTree = new ArbolBinario<Object>(); //TODO: Descomentar y crear instancia del TDA a testear
-		
+		// binaryTree = new ArbolBinario<Object>(); //TODO: Descomentar y crear
+		// instancia del TDA a testear
+
 		// para método attach
-		//leftTree = new ArbolBinario<Object>(); //TODO: Descomentar y crear instancia del TDA a testear
-		//rightTree = new ArbolBinario<Object>(); //TODO: Descomentar y crear instancia del TDA a testear
-		
+		// leftTree = new ArbolBinario<Object>(); //TODO: Descomentar y crear instancia
+		// del TDA a testear
+		// rightTree = new ArbolBinario<Object>(); //TODO: Descomentar y crear instancia
+		// del TDA a testear
+
 		o1 = new Object();
 		o2 = new Object();
 		Assume.assumeNotNull(binaryTree, leftTree, rightTree);
@@ -266,7 +269,7 @@ public class BinaryTreeTests {
 	@Test
 	public void children_onlyLeftChild_returnsCollectionWithLeftChild() {
 		binaryTree.createRoot(new Object());
-		Position<Object> positionWithLeftChild =binaryTree.root();
+		Position<Object> positionWithLeftChild = binaryTree.root();
 		binaryTree.addLeft(positionWithLeftChild, o1);
 		Iterator<Position<Object>> children = binaryTree.children(positionWithLeftChild).iterator();
 		assertTrue("El método children retorna una colección vacía para un nodo con solo hijo izquierdo.",
@@ -286,7 +289,7 @@ public class BinaryTreeTests {
 	@Test
 	public void children_onlyRightChild_returnsCollectionWithRightChild() {
 		binaryTree.createRoot(new Object());
-		Position<Object> positionWithRightChild =binaryTree.root();
+		Position<Object> positionWithRightChild = binaryTree.root();
 		binaryTree.addRight(positionWithRightChild, o1);
 		Iterator<Position<Object>> children = binaryTree.children(positionWithRightChild).iterator();
 		assertTrue("El método children retorna una colección vacía para un nodo con solo hijo derecho.",
@@ -305,7 +308,7 @@ public class BinaryTreeTests {
 	@Test
 	public void children_twoChildren_returnsCollectionWithChildren() {
 		binaryTree.createRoot(new Object());
-		Position<Object> positionWithChildren=binaryTree.root();
+		Position<Object> positionWithChildren = binaryTree.root();
 		binaryTree.addLeft(positionWithChildren, o1);
 		binaryTree.addRight(positionWithChildren, o2);
 		Iterator<Position<Object>> children = binaryTree.children(positionWithChildren).iterator();
@@ -984,20 +987,28 @@ public class BinaryTreeTests {
 		rightTree.addRight(rightTree.root(), new Object());
 		binaryTree.attach(root, leftTree, rightTree);
 
-		assertEquals("El método attach no vincula correctamente el subárbol izquierdo.", rootT1.element(), binaryTree.left(root).element());
-		assertEquals("El método attach no vincula correctamente el subárbol izquierdo.", rootT2.element(), binaryTree.right(root).element());
+		assertEquals("El método attach no vincula correctamente el subárbol izquierdo.", rootT1.element(),
+				binaryTree.left(root).element());
+		assertEquals("El método attach no vincula correctamente el subárbol izquierdo.", rootT2.element(),
+				binaryTree.right(root).element());
 
-		//Se chequea que los subárboles hayan sido efectivamente clonados (eliminar nodos de los subárboles no debería eliminarlos del receptor del mensaje)
+		// Se chequea que los subárboles hayan sido efectivamente clonados (eliminar
+		// nodos de los subárboles no debería eliminarlos del receptor del mensaje)
 		leftTree.removeNode(leftTree.left(leftTree.root()));
 		leftTree.removeNode(leftTree.root());
 		rightTree.removeNode(rightTree.left(rightTree.root()));
 		rightTree.removeNode(rightTree.right(rightTree.root()));
 		rightTree.removeNode(rightTree.root());
-		assertTrue("El método attach no clona el subárbol izquierdo correctamente", binaryTree.hasLeft(binaryTree.root()));
-		assertTrue("El método attach no clona el subárbol izquierdo correctamente", binaryTree.hasLeft(binaryTree.left(binaryTree.root())));
-		assertTrue("El método attach no clona el subárbol derecho correctamente", binaryTree.hasRight(binaryTree.root()));
-		assertTrue("El método attach no clona el subárbol derecho correctamente", binaryTree.hasLeft(binaryTree.right(binaryTree.root())));
-		assertTrue("El método attach no clona el subárbol derecho correctamente", binaryTree.hasRight(binaryTree.right(binaryTree.root())));
+		assertTrue("El método attach no clona el subárbol izquierdo correctamente",
+				binaryTree.hasLeft(binaryTree.root()));
+		assertTrue("El método attach no clona el subárbol izquierdo correctamente",
+				binaryTree.hasLeft(binaryTree.left(binaryTree.root())));
+		assertTrue("El método attach no clona el subárbol derecho correctamente",
+				binaryTree.hasRight(binaryTree.root()));
+		assertTrue("El método attach no clona el subárbol derecho correctamente",
+				binaryTree.hasLeft(binaryTree.right(binaryTree.root())));
+		assertTrue("El método attach no clona el subárbol derecho correctamente",
+				binaryTree.hasRight(binaryTree.right(binaryTree.root())));
 	}
 
 }

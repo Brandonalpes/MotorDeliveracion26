@@ -1,7 +1,7 @@
-package ar.edu.uns.cs.ed.tdas.tdamapeo;
+package test.java.ar.edu.uns.cs.ed.tdas.tdamapeo;
 
-import ar.edu.uns.cs.ed.tdas.excepciones.*;
-import ar.edu.uns.cs.ed.tdas.Entry;
+import main.java.ar.edu.uns.cs.ed.tdas.excepciones.*;
+import main.java.ar.edu.uns.cs.ed.tdas.Entry;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,6 @@ import java.util.*;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class MapTest {
 
@@ -23,7 +22,8 @@ public class MapTest {
 	private Map<Integer, Integer> getMapeo() {
 
 		Map<Integer, Integer> mapeo = null;
-		//mapeo = new MapeoConHash<Integer, Integer>(); //TODO: Descomentar y crear instancia del TDA a testear
+		// mapeo = new MapeoConHash<Integer, Integer>(); //TODO: Descomentar y crear
+		// instancia del TDA a testear
 		return mapeo;
 
 	}
@@ -46,7 +46,7 @@ public class MapTest {
 		n3 = 3;
 
 		Assume.assumeNotNull(s);
-				
+
 	}
 
 	/* TESTEANDO EL METODO SIZE() */
@@ -74,7 +74,8 @@ public class MapTest {
 			assertTrue("Tamaño de Mapeo luego de insertar tres veces != 3",
 					s.size() == 3);
 
-			// Testeando que el método remove() actualice el size, y que get(K key) no lo haga.
+			// Testeando que el método remove() actualice el size, y que get(K key) no lo
+			// haga.
 
 			s.get(i1);
 
@@ -116,8 +117,8 @@ public class MapTest {
 
 	@Test
 	public void isEmpty() {
-		
-	  try {
+
+		try {
 
 			assertTrue("EL Mapeo no está vacío justo después de ser creado",
 					s.isEmpty());
@@ -141,7 +142,7 @@ public class MapTest {
 
 			fail("El método put() no debería lanzar InvalidkeyException con una clave válida.");
 		}
-		
+
 		try {
 
 			s.get(i1);
@@ -194,16 +195,16 @@ public class MapTest {
 	public void get() {
 
 		Integer valor, clave, valor_aux, clave_aux;
-		Vector<Vector<Integer>> V= new Vector<Vector<Integer>>(2);
-		Set<Integer> claves= new HashSet<Integer>();
-		
-		//Clave inválida
+		Vector<Vector<Integer>> V = new Vector<Vector<Integer>>(2);
+		Set<Integer> claves = new HashSet<Integer>();
+
+		// Clave inválida
 		try {
-			 s.get(null);
-			 fail("El método get debería haber lanzado la excepción InvalidKeyException para una clave nula");
-		} catch (InvalidKeyException e) {	
+			s.get(null);
+			fail("El método get debería haber lanzado la excepción InvalidKeyException para una clave nula");
+		} catch (InvalidKeyException e) {
 		}
-		
+
 		// Mapeo vacío.
 		try {
 
@@ -220,14 +221,12 @@ public class MapTest {
 
 			s.put(i3, n3);
 
-		
 		} catch (InvalidKeyException e) {
 
 			fail("El método put(K k, V v) no debería lanzar InvalidkeyException con una clave válida.");
 
 		}
 
-		
 		try {
 
 			valor = s.get(i1);
@@ -248,8 +247,6 @@ public class MapTest {
 
 			s.remove(i3);
 
-			
-
 		} catch (InvalidKeyException e) {
 
 			fail("El método get(K key) o remove(K key) no debería lanzar la excepción InvalidKeyException con claves válidas.");
@@ -257,62 +254,60 @@ public class MapTest {
 		}
 
 		// Insertando 10000 elementos
-        V.add(new Vector<Integer>(10000));
-        V.add(new Vector<Integer>(10000));
+		V.add(new Vector<Integer>(10000));
+		V.add(new Vector<Integer>(10000));
 		try {
-			for (int i=0; i<10000;i++)
-				{clave=i;
-				 claves.add(clave);
-				 valor=i;
-				 V.get(0).add(clave);
-				 V.get(1).add(valor);
-				 s.put(clave, valor);
-				}
-            
-		   } catch (InvalidKeyException e) {
+			for (int i = 0; i < 10000; i++) {
+				clave = i;
+				claves.add(clave);
+				valor = i;
+				V.get(0).add(clave);
+				V.get(1).add(valor);
+				s.put(clave, valor);
+			}
+
+		} catch (InvalidKeyException e) {
 
 			fail("El método put(K key) no debería lanzar InvalidkeyException con una clave válida.");
 
-		   }
+		}
 
-		//Testeando Get con 10000 elementos	
+		// Testeando Get con 10000 elementos
 
 		try {
-			for (int i=0; i<10000;i++)
-				{clave_aux= V.get(0).get(i);
-				 valor_aux= V.get(1).get(i);
-				 valor=s.get(clave_aux);
-				 assertTrue("get(K k) no funciona correctamente", valor == valor_aux);
-				}
-		}catch (InvalidKeyException e) {
-				fail("El método get(K k) no debería lanzar InvalidKeyException con una clave válida.");
+			for (int i = 0; i < 10000; i++) {
+				clave_aux = V.get(0).get(i);
+				valor_aux = V.get(1).get(i);
+				valor = s.get(clave_aux);
+				assertTrue("get(K k) no funciona correctamente", valor == valor_aux);
+			}
+		} catch (InvalidKeyException e) {
+			fail("El método get(K k) no debería lanzar InvalidKeyException con una clave válida.");
 
 		}
 
 	}
 
-
 	@Test
 	public void put_remove() {
 
 		Integer valor, clave, clave_aux, valor_aux;
-		Vector<Vector<Integer>> V= new Vector<Vector<Integer>>(2);
-		Set<Integer> claves= new HashSet<Integer>();
-		
-		//Clave inválida
+		Vector<Vector<Integer>> V = new Vector<Vector<Integer>>(2);
+		Set<Integer> claves = new HashSet<Integer>();
+
+		// Clave inválida
 		try {
-			 s.remove(null);
-			 fail("El método remove debería haber lanzado la excepción InvalidKeyException para una clave nula");
-		} catch (InvalidKeyException e) {	
+			s.remove(null);
+			fail("El método remove debería haber lanzado la excepción InvalidKeyException para una clave nula");
+		} catch (InvalidKeyException e) {
 		}
-		
+
 		try {
-             s.put(null,n1);
-			 fail("El método put debería haber lanzado la excepción InvalidKeyException para una clave inválida");
-		} catch (InvalidKeyException e) {	
+			s.put(null, n1);
+			fail("El método put debería haber lanzado la excepción InvalidKeyException para una clave inválida");
+		} catch (InvalidKeyException e) {
 		}
-	
-		
+
 		// Mapeo vacio
 
 		try {
@@ -322,41 +317,41 @@ public class MapTest {
 		} catch (InvalidKeyException e) {
 			fail("El método remove(K k) no debería lanzar InvalidKeyException con una clave válida.");
 		}
-		
+
 		// Insertando put 10000 elementos.
-        V.add(new Vector<Integer>(10000));
-        V.add(new Vector<Integer>(10000));
+		V.add(new Vector<Integer>(10000));
+		V.add(new Vector<Integer>(10000));
 		try {
-			for (int i=0; i<10000;i++)
-				{clave=i; 
-				 claves.add(clave);
-				 valor=i;
-				 V.get(0).add(clave);
-				 V.get(1).add(valor);
-				 s.put(clave, valor);
-				 assertTrue("Put no actualizó correctamente el size", s.size() == i+1);
-				}
-            
+			for (int i = 0; i < 10000; i++) {
+				clave = i;
+				claves.add(clave);
+				valor = i;
+				V.get(0).add(clave);
+				V.get(1).add(valor);
+				s.put(clave, valor);
+				assertTrue("Put no actualizó correctamente el size", s.size() == i + 1);
+			}
+
 		} catch (InvalidKeyException e) {
 			fail("El método put(K key) no debería lanzar InvalidkeyException con una clave válida.");
 		}
 
-		//Testeando remove con 10000 elementos	
+		// Testeando remove con 10000 elementos
 
 		try {
-			for (int i=9999; i>=0;i--)
-				{clave_aux= V.get(0).get(i);
-				 valor_aux= V.get(1).get(i);
-				 valor=s.remove(clave_aux);
-				 assertTrue("remove(K k) no funciona correctamente", valor == valor_aux);
-				 assertTrue("remove(K k) no actualiza correctamente el size", s.size() == i);
-				 assertTrue("remove(K k) no elimina correctamente la entrada", s.remove(clave_aux) == null);
-				}
+			for (int i = 9999; i >= 0; i--) {
+				clave_aux = V.get(0).get(i);
+				valor_aux = V.get(1).get(i);
+				valor = s.remove(clave_aux);
+				assertTrue("remove(K k) no funciona correctamente", valor == valor_aux);
+				assertTrue("remove(K k) no actualiza correctamente el size", s.size() == i);
+				assertTrue("remove(K k) no elimina correctamente la entrada", s.remove(clave_aux) == null);
+			}
 		} catch (InvalidKeyException e) {
-				fail("El método remove(K k) no debería lanzar InvalidKeyException con una clave válida.");
+			fail("El método remove(K k) no debería lanzar InvalidKeyException con una clave válida.");
 		}
-		
-		//Mapeo vacío.
+
+		// Mapeo vacío.
 
 		try {
 			valor = s.remove(i1);
@@ -364,76 +359,75 @@ public class MapTest {
 		} catch (InvalidKeyException e) {
 			fail("El método remove(K k) no debería lanzar InvalidKeyException con una clave válida.");
 		}
-		
+
 		assertTrue("El mapeo debería haber quedado vacío", s.isEmpty());
-		
+
 	}
 
 	/* TESTEANDO LOS METODOS entries(), keys() y values() */
 	@Test
-	public void Keys_values_entry()
-	{ Iterable<Entry<Integer,Integer>> It_entries;
-	  Iterable<Integer> It_values;
-	  Iterable<Integer> It_keys;
-	  Integer clave,valor;
-	  Set<Integer> claves= new HashSet<Integer>();
-	  Set<Integer> valores= new HashSet<Integer>();
-	  LinkedHashMap<Integer, Integer> entradas= new LinkedHashMap<Integer,Integer>();
+	public void Keys_values_entry() {
+		Iterable<Entry<Integer, Integer>> It_entries;
+		Iterable<Integer> It_values;
+		Iterable<Integer> It_keys;
+		Integer clave, valor;
+		Set<Integer> claves = new HashSet<Integer>();
+		Set<Integer> valores = new HashSet<Integer>();
+		LinkedHashMap<Integer, Integer> entradas = new LinkedHashMap<Integer, Integer>();
 
-	  //Mapeo vacío
-		It_entries=s.entries();
-		It_values=s.values();
-		It_keys=s.keys();
-			
+		// Mapeo vacío
+		It_entries = s.entries();
+		It_values = s.values();
+		It_keys = s.keys();
+
 		assertTrue("El método entries no funciona correctamente para un mapeo vacío", !It_entries.iterator().hasNext());
-	    assertTrue("El método values no funciona correctamente para un mapeo vacío", !It_values.iterator().hasNext());
-        assertTrue("El método keys no funciona correctamente para un mapeo vacío", !It_keys.iterator().hasNext());
-		
-        //Insertando 10000 entradas en el mapeo		
-    	try {
-			for (int i=0; i<10000;i++)
-				{ clave=i;
-			 	  claves.add(clave);
-				  valor=i;
-				  valores.add(valor);
-				  entradas.put(clave, valor);
-				  s.put(clave, valor);
-				  assertTrue("Put no actualizó correctamente el size", s.size() == i+1);
-				}
-    	} catch (InvalidKeyException e) {
-    		fail("El método put(K key) no debería lanzar InvalidkeyException con una clave válida.");
+		assertTrue("El método values no funciona correctamente para un mapeo vacío", !It_values.iterator().hasNext());
+		assertTrue("El método keys no funciona correctamente para un mapeo vacío", !It_keys.iterator().hasNext());
+
+		// Insertando 10000 entradas en el mapeo
+		try {
+			for (int i = 0; i < 10000; i++) {
+				clave = i;
+				claves.add(clave);
+				valor = i;
+				valores.add(valor);
+				entradas.put(clave, valor);
+				s.put(clave, valor);
+				assertTrue("Put no actualizó correctamente el size", s.size() == i + 1);
+			}
+		} catch (InvalidKeyException e) {
+			fail("El método put(K key) no debería lanzar InvalidkeyException con una clave válida.");
 		}
-		
-		//Testeando Keys()
-		 It_keys=s.keys();
-		
-		 for(Integer key :It_keys)
-			 {	assertTrue("El método keys() no funciona correctamente", claves.contains(key));
-		      	claves.remove(key);
-		     }
-		 assertTrue("keys() no recorre todas las claves del mapeo", claves.isEmpty());	
-		
-		 //Testeando values()
-		 It_values=s.values();
-		
-		 for(Integer value :It_values)
-			 {	assertTrue("El método values() no funciona correctamente", valores.contains(value));
-		      	valores.remove(value);
-		     }
-		 assertTrue("values() no recorre todas las claves del mapeo", valores.isEmpty());	
-	   
-		//Testeando entries()
-		 It_entries=s.entries();
-		
-		 for(Entry<Integer,Integer> en :It_entries)
-			 {	valor=entradas.get(en.getKey());
-			  	assertTrue("El método entries() no funciona correctamente", valor!=null);
-			  	assertTrue("El método entries() no funciona correctamente", valor==en.getValue());
-			  	entradas.remove(en.getKey());
-			 }
-		 assertTrue("entradas() no recorre todas las claves del mapeo", entradas.isEmpty());	
-	
-	}	
-	
-	
+
+		// Testeando Keys()
+		It_keys = s.keys();
+
+		for (Integer key : It_keys) {
+			assertTrue("El método keys() no funciona correctamente", claves.contains(key));
+			claves.remove(key);
+		}
+		assertTrue("keys() no recorre todas las claves del mapeo", claves.isEmpty());
+
+		// Testeando values()
+		It_values = s.values();
+
+		for (Integer value : It_values) {
+			assertTrue("El método values() no funciona correctamente", valores.contains(value));
+			valores.remove(value);
+		}
+		assertTrue("values() no recorre todas las claves del mapeo", valores.isEmpty());
+
+		// Testeando entries()
+		It_entries = s.entries();
+
+		for (Entry<Integer, Integer> en : It_entries) {
+			valor = entradas.get(en.getKey());
+			assertTrue("El método entries() no funciona correctamente", valor != null);
+			assertTrue("El método entries() no funciona correctamente", valor == en.getValue());
+			entradas.remove(en.getKey());
+		}
+		assertTrue("entradas() no recorre todas las claves del mapeo", entradas.isEmpty());
+
+	}
+
 }

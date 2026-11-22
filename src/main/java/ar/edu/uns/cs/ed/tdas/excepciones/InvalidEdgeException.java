@@ -1,6 +1,6 @@
-package ar.edu.uns.cs.ed.tdas.excepciones;
+package main.java.ar.edu.uns.cs.ed.tdas.excepciones;
 
-public class InvalidEdgeException extends RuntimeException{
+public class InvalidEdgeException extends RuntimeException {
 	public InvalidEdgeException(String s) {
 		super(s);
 	}

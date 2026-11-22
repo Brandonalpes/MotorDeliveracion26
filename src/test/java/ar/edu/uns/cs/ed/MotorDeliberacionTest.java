@@ -1,4 +1,4 @@
-package ar.edu.uns.cs.ed;
+package test.java.ar.edu.uns.cs.ed;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,24 +12,25 @@ import main.java.ar.edu.uns.cs.ed.Usuario;
 
 /**
  * Tests de MotorDeliveracion (JUnit 4).
- * En cada test se arma un debate de 16 nodos ("Dar asueto por el día del estudiante"):
+ * En cada test se arma un debate de 16 nodos ("Dar asueto por el día del
+ * estudiante"):
  *
  * debate1 (usr1)
- * ├── posteo1  AFAVOR   usr2
- * │   ├── posteo3  ENCONTRA usr3
- * │   │   ├── posteo7  AFAVOR   usr4
- * │   │   └── posteo8  ENCONTRA usr2
- * │   └── posteo4  AFAVOR   usr5
- * │       └── posteo9  ENCONTRA usr1
- * ├── posteo2  ENCONTRA usr3
- * │   ├── posteo5  AFAVOR   usr4
- * │   │   ├── posteo10 ENCONTRA usr5
- * │   │   └── posteo11 AFAVOR   usr3
- * │   └── posteo6  ENCONTRA usr2
- * │       └── posteo12 AFAVOR   usr1
- * └── posteo13 AFAVOR   usr4
- *     ├── posteo14 ENCONTRA usr5
- *     └── posteo15 AFAVOR   usr2
+ * ├── posteo1 AFAVOR usr2
+ * │ ├── posteo3 ENCONTRA usr3
+ * │ │ ├── posteo7 AFAVOR usr4
+ * │ │ └── posteo8 ENCONTRA usr2
+ * │ └── posteo4 AFAVOR usr5
+ * │ └── posteo9 ENCONTRA usr1
+ * ├── posteo2 ENCONTRA usr3
+ * │ ├── posteo5 AFAVOR usr4
+ * │ │ ├── posteo10 ENCONTRA usr5
+ * │ │ └── posteo11 AFAVOR usr3
+ * │ └── posteo6 ENCONTRA usr2
+ * │ └── posteo12 AFAVOR usr1
+ * └── posteo13 AFAVOR usr4
+ * ├── posteo14 ENCONTRA usr5
+ * └── posteo15 AFAVOR usr2
  *
  * Argumentos por usuario: usr1=3, usr2=4, usr3=3, usr4=3, usr5=3.
  */
@@ -335,7 +336,8 @@ public class MotorDeliberacionTest {
         motor.consultarArgumentosPorUsuario(" ");
     }
 
-    // ---------------------- registrarOperacion / deshacerUltimaOperacion ----------------------
+    // ---------------------- registrarOperacion / deshacerUltimaOperacion
+    // ----------------------
 
     @Test(expected = IllegalArgumentException.class)
     public void registrarOperacion_codigoInvalido_lanzaExcepcion() {
@@ -364,7 +366,7 @@ public class MotorDeliberacionTest {
     @Test(expected = IllegalStateException.class)
     public void deshacer_despuesDeEliminar_noSePuedeDeshacer() throws Exception {
         motor.eliminarPosteo("usr5", "posteo14");
-        try{
+        try {
             motor.deshacerUltimaOperacion();
         } catch (IllegalStateException e) {
             assertTrue(e.getMessage().contains("No se pudo deshacer la operación POSTEAR"));
@@ -373,9 +375,11 @@ public class MotorDeliberacionTest {
         motor.deshacerUltimaOperacion();
     }
 
-    // Tests del comportamiento esperado; hoy fallan por bugs (ver motivo en @Ignore).
+    // Tests del comportamiento esperado; hoy fallan por bugs (ver motivo en
+    // @Ignore).
 
-    //@Ignore("Bug: clearDebate() vacía la pila y luego top() lanza EmptyStackException")
+    // @Ignore("Bug: clearDebate() vacía la pila y luego top() lanza
+    // EmptyStackException")
     @Test
     public void deshacer_crearDebate_limpiaElDebate() throws Exception {
         MotorDeliberacion m = new MotorDeliberacion();
@@ -393,20 +397,20 @@ public class MotorDeliberacionTest {
     public void deshacer_dosPosteosSeguidos_eliminaAmbos() throws Exception {
         motor.deshacerUltimaOperacion(); // posteo15 (usr2)
         motor.deshacerUltimaOperacion(); // posteo14 (usr5)
-        
+
         assertEquals(3, motor.consultarArgumentosPorUsuario("usr2").size());
         assertEquals(2, motor.consultarArgumentosPorUsuario("usr5").size());
     }
 
-       @Test 
-    public  void calcularPolarizacionDebate()
-    {
-        DiccionarioHashAbierto<String,DiccionarioHashAbierto<String,Integer>> polarizacion = motor.calcularPolarizacionDebate();
-        
+    @Test
+    public void calcularPolarizacionDebate() {
+        DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>> polarizacion = motor
+                .calcularPolarizacionDebate();
+
         assertEquals(16, polarizacion.size());
-        assertPolarizacion(polarizacion.find("posteo1").getValue(),3, 3);
-        assertPolarizacion(polarizacion.find("posteo13").getValue(),2, 1);   
-     }
+        assertPolarizacion(polarizacion.find("posteo1").getValue(), 3, 3);
+        assertPolarizacion(polarizacion.find("posteo13").getValue(), 2, 1);
+    }
 
     // ----- calcularPolarizacionNodo -----
 
@@ -419,7 +423,7 @@ public class MotorDeliberacionTest {
     public void polarizacionNodo_idInexistente_lanzaExcepcion() {
         motor.calcularPolarizacionNodo("noExiste");
     }
-    
+
     private <V> void assertPolarizacion(DiccionarioHashAbierto<String, Integer> dic, int afavor, int encontra) {
         assertEquals(Integer.valueOf(afavor), dic.find("AFAVOR").getValue());
         assertEquals(Integer.valueOf(encontra), dic.find("ENCONTRA").getValue());
@@ -491,10 +495,10 @@ public class MotorDeliberacionTest {
         motor.calcularPolarizacionNodo("debate1");
     }
 
+    ///////////////////////////////////
 
-////////////////////////////////////
-
-    @Test public void mostrarDebate() {
+    @Test
+    public void mostrarDebate() {
         System.out.println("Árbol de debate:");
         motor.imprimirDebate();
     }

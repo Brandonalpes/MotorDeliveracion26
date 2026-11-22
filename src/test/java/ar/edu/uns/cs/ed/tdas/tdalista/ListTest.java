@@ -1,7 +1,8 @@
-package ar.edu.uns.cs.ed.tdas.tdalista;
+package test.java.ar.edu.uns.cs.ed.tdas.tdalista;
 
-import ar.edu.uns.cs.ed.tdas.excepciones.*;
-import ar.edu.uns.cs.ed.tdas.Position;
+import main.java.ar.edu.uns.cs.ed.tdas.excepciones.*;
+import main.java.ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import main.java.ar.edu.uns.cs.ed.tdas.Position;
 
 import static org.junit.Assert.*;
 import java.util.*;
@@ -18,7 +19,8 @@ public class ListTest {
 
 	private PositionList<String> getList() {
 		PositionList<String> lista = null;
-		//lista = new ListaDoblementeEnlazada<String>(); //TODO: Descomentar y crear instancia del TDA a testear
+		// lista = new ListaDoblementeEnlazada<String>(); //TODO: Descomentar y crear
+		// instancia del TDA a testear
 		return lista;
 	}
 
@@ -35,7 +37,9 @@ public class ListTest {
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO size()_____________________________*/
+	 * _______________________TESTEAMOS EL METODO
+	 * size()_____________________________
+	 */
 
 	@Test
 	public void size() {
@@ -68,14 +72,15 @@ public class ListTest {
 					l.size() == 0);
 		} catch (InvalidPositionException e) {
 			fail("Al eliminar un elemento de una lista que no está vacía lanza la excepción InvalidPositionException");
-		}
-		catch (EmptyListException e) {
+		} catch (EmptyListException e) {
 			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
 		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO isEmpty()_____________________________*/
+	 * _______________________TESTEAMOS EL METODO
+	 * isEmpty()_____________________________
+	 */
 
 	@Test
 	public void isEmpty() {
@@ -102,11 +107,9 @@ public class ListTest {
 			}
 		} catch (InvalidPositionException e) {
 			fail("Al eliminar un elemento de una lista con un único elemento lanza la excepción InvalidPositionException");
-		}
-		catch (EmptyListException e) {
+		} catch (EmptyListException e) {
 			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
 		}
-
 
 		// Caso_de_prueba: Lista Vacía.
 		try {
@@ -116,23 +119,25 @@ public class ListTest {
 					l.isEmpty());
 		} catch (InvalidPositionException e) {
 			fail("Al eliminar un elemento de una lista con un único elemento lanza la excepción InvalidPositionException");
-		}
-		catch (EmptyListException e) {
+		} catch (EmptyListException e) {
 			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
 		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO first()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * first()_____________________________
+	 */
 
 	@Test
 	public void first() {
 		// Caso_de_prueba: Lista Vacía.
-		try{
+		try {
 			l.first();
 			fail("Al solicitar la primer posición de una lista vacía debería haber lanzado la excepción EmptyListException");
-		}catch (EmptyListException e) {}		
-		try{
+		} catch (EmptyListException e) {
+		}
+		try {
 			// Caso_de_prueba: Lista con un único elemento.
 			l.addFirst(n1);
 			assertTrue(
@@ -147,7 +152,9 @@ public class ListTest {
 			assertTrue(
 					"first() no funciona correctamente para una lista de tres elemento.",
 					l.first().element() == n2);
-		}catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		try {
 			l.remove(l.first());
 			assertTrue(
@@ -160,19 +167,25 @@ public class ListTest {
 					l.first().element() == n3);
 		} catch (InvalidPositionException e2) {
 			fail("No se debería lanzar InvalidPositionException al invocar remove() en el testeo del método first()");
-		}catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO last()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * last()_____________________________
+	 */
 
 	@Test
 	public void last() {
 		// Caso_de_prueba: Lista Vacía.
-		try{ l.last();
-		fail("Al solicitar la última posición de una lista vacía debería haber lanzado la excepción EmptyListException");
-		}catch (EmptyListException e) {}
-		try{
+		try {
+			l.last();
+			fail("Al solicitar la última posición de una lista vacía debería haber lanzado la excepción EmptyListException");
+		} catch (EmptyListException e) {
+		}
+		try {
 			// Caso_de_prueba: Lista con un único elemento.
 			l.addFirst(n1);
 			assertTrue(
@@ -187,7 +200,9 @@ public class ListTest {
 			assertTrue(
 					"last() no funciona correctamente para una lista de tres elemento.",
 					l.last().element() == n2);
-		}catch (EmptyListException e){ fail("Al solicitar la última posición de una lista que no está vacía se lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la última posición de una lista que no está vacía se lanza la excepción EmptyListException");
+		}
 		try {
 			l.remove(l.last());
 			assertTrue(
@@ -200,11 +215,15 @@ public class ListTest {
 					l.last().element() == n3);
 		} catch (InvalidPositionException e) {
 			fail("No se debería lanzar InvalidPositionException al invocar remove() en el testeo del método last()");
-		} catch (EmptyListException e) { fail("Al solicitar la última posición de una lista que no está vacía se lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la última posición de una lista que no está vacía se lanza la excepción EmptyListException");
+		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO next()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * next()_____________________________
+	 */
 
 	@Test
 	public void next() {
@@ -228,7 +247,9 @@ public class ListTest {
 		} catch (InvalidPositionException e) {
 		} catch (BoundaryViolationException e2) {
 			fail("next() no debería lanzar la excepción BoundaryViolationException con una posición nula");
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: última posición de la lista.
 		try {
 			cursor = l.next(l.last());
@@ -236,7 +257,9 @@ public class ListTest {
 		} catch (InvalidPositionException e) {
 			fail("next() no debería lanzar la excepción InvalidPositionException con la última posición de la lista");
 		} catch (BoundaryViolationException e2) {
-		} catch (EmptyListException e) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_de_prueba: Lista con varios elementos.
 		try {
@@ -265,8 +288,10 @@ public class ListTest {
 			l.remove(l.first());
 		} catch (InvalidPositionException e) {
 			fail("No se debería lanzar InvalidPositionException al invocar remove() con una posición válida en el testeo del método next()");
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
-		try {	
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
+		try {
 			for (int i = 0; i < 1000; i++)
 				l.addLast(String.valueOf(i));
 			cursor = l.first();
@@ -280,7 +305,9 @@ public class ListTest {
 			fail("next() no debería lanzar la excepción InvalidPositionException con una posición válida");
 		} catch (BoundaryViolationException e2) {
 			fail("next() no debería lanzar la excepción BoundaryViolationException con una posición distinta a la última posición de la lista");
-		} catch (EmptyListException e) { fail("Al solicitar la primer posición de la lista no debería lanzar la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de la lista no debería lanzar la excepción EmptyListException");
+		}
 		try {
 			cursor = l.next(cursor);
 			fail("next() no debería lanzar la excepción BoundaryViolationException con una posición distinta a la última posición de la lista");
@@ -291,7 +318,9 @@ public class ListTest {
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO prev()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * prev()_____________________________
+	 */
 
 	@Test
 	public void prev() {
@@ -316,7 +345,9 @@ public class ListTest {
 		} catch (InvalidPositionException e) {
 		} catch (BoundaryViolationException e2) {
 			fail("prev() no debería lanzar la excepción BoundaryViolationException con una posición nula");
-		} catch (EmptyListException e) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: Primer posición de la lista.
 		try {
 			cursor = l.prev(l.first());
@@ -324,7 +355,9 @@ public class ListTest {
 		} catch (InvalidPositionException e) {
 			fail("prev() no debería lanzar la excepción InvalidPositionException con la primer posición de la lista");
 		} catch (BoundaryViolationException e2) {
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_de_prueba: Lista con varios elementos.
 		try {
@@ -353,7 +386,9 @@ public class ListTest {
 			l.remove(l.first());
 		} catch (InvalidPositionException e) {
 			fail("No se debería lanzar InvalidPositionException al invocar remove() con una posición válida en el testeo del método prev()");
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		try {
 			for (i = 0; i < 1000; i++)
@@ -371,12 +406,16 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 0)
 				fail("prev() no debería lanzar la excepción BoundaryViolationException con una posición distinta a la primer posición de la lista");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO addFirst()_________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * addFirst()_________________________
+	 */
 
 	@Test
 	public void addFirst() {
@@ -399,7 +438,9 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 0)
 				fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addFirst()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: Lista con varios elementos.(Hacia atras)
 		try {
 			cursor = l.last();
@@ -415,13 +456,16 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 999)
 				fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista en el testeo del método addFirst()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
-
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO addLast()___________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * addLast()___________________________
+	 */
 
 	@Test
 	public void addLast() {
@@ -444,7 +488,9 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 999)
 				fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addLast()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		try {
 			// Caso_de_prueba: Lista con varios elementos.(Hacia atrás)
@@ -461,12 +507,16 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 0)
 				fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista en el testeo del método addLast()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO addAfter()___________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * addAfter()___________________________
+	 */
 
 	@Test
 	public void addAfter() {
@@ -476,12 +526,13 @@ public class ListTest {
 			l.addAfter(l.first(), n1);
 			fail("Al invocar first() sobre una lista vacía debería lanzarse la excepción EmptyListException");
 		} catch (InvalidPositionException e) {
-		} catch (EmptyListException e2) {}
+		} catch (EmptyListException e2) {
+		}
 		try {
 			l.addAfter(null, n1);
 			fail("Al invocar addAfter() sobre una lista vacía debería lanzarse la excepción InvalidPositionException");
 		} catch (InvalidPositionException e) {
-		} 
+		}
 
 		l.addFirst(n1);
 		// Caso_de_prueba: Posición Inválida.
@@ -496,7 +547,9 @@ public class ListTest {
 			l.addAfter(l.last(), n3);
 		} catch (InvalidPositionException e) {
 			fail("addAfter() no debería lanzar la excepción InvalidPositionException con una posición válida");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer o última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer o última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: Lista con varios elementos (Hacia adelante).
 		try {
 			cursor = l.first();
@@ -512,7 +565,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar next() o addAfter() con una posición válida en el testeo del método addAfter()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addAfter()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_de_prueba: Lista con varios elementos (Hacia atras).
 		try {
@@ -529,10 +584,12 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar prev() o addAfter() con una posición válida en el testeo del método addAfter()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista en el testeo del método addAfter()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_de_prueba: Lista con varios elementos (Hacia adelante).
-		try {    
+		try {
 			cursor = l.first();
 			l.addAfter(l.first(), n4);
 			cursor = l.next(cursor);
@@ -545,7 +602,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar next() o addAfter() con una posición válida en el testeo del método addAfter()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addAfter()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer o última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer o última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		try {
 			cursor = l.first();
@@ -571,7 +630,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar next() o addAfter() con una posición válida en el testeo del método addAfter()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addAfter()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_de_prueba: Lista con varios elementos (Hacia atras).
 		try {
@@ -597,13 +658,16 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar prev() o addAfter() con una posición válida en el testeo del método addAfter()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista en el testeo del método addAfter()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
-
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO addAfter()____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * addAfter()____________________________
+	 */
 
 	@Test
 	public void addBefore() {
@@ -612,14 +676,15 @@ public class ListTest {
 		try {
 			l.addBefore(l.first(), n1);
 			fail("Al invocar first() sobre una lista vacía debería lanzarse la excepción EmptyListException");
-			fail("Al invocar addBefore() sobre una lista vacía debería lanzarse la excepción InvalidPositionException");			
+			fail("Al invocar addBefore() sobre una lista vacía debería lanzarse la excepción InvalidPositionException");
 		} catch (InvalidPositionException e) {
-		} catch (EmptyListException e2) {}
+		} catch (EmptyListException e2) {
+		}
 		try {
 			l.addBefore(null, n1);
-			fail("Al invocar addBefore() sobre una lista vacía debería lanzarse la excepción InvalidPositionException");			
+			fail("Al invocar addBefore() sobre una lista vacía debería lanzarse la excepción InvalidPositionException");
 		} catch (InvalidPositionException e) {
-		} 
+		}
 		l.addFirst(n1);
 		// Caso_de_prueba: Posición inválida.
 		try {
@@ -633,7 +698,9 @@ public class ListTest {
 			l.addBefore(l.last(), n3);
 		} catch (InvalidPositionException e) {
 			fail("addBefore() no debería lanzar la excepción InvalidPositionException con una posición válida");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer o última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer o última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		try {
 			cursor = l.first();
 			assertTrue("addBefore() no funciona correctamente",
@@ -648,7 +715,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar next() o addBefore() con una posición válida en el testeo del método addBefore()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addBefore()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: Lista con varios elementos (Hacia atrás).
 		try {
 			cursor = l.last();
@@ -664,7 +733,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar prev() o addBefore() con una posición válida en el testeo del método addBefore()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista en el testeo del método addBefore()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		try {
 			cursor = l.first();
 			l.addBefore(l.first(), n4);
@@ -675,7 +746,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar next() o addBefore() con una posición válida en el testeo del método addBefore()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addBefore()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última y primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última y primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: Lista con varios elementos (Hacia adelante).
 		try {
 			cursor = l.first();
@@ -701,7 +774,9 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar next() o addBefore() con una posición válida en el testeo del método addBefore()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista en el testeo del método addBefore()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso_de_prueba: Lista con varios elementos (Hacia atrás).
 		try {
 			cursor = l.last();
@@ -726,25 +801,30 @@ public class ListTest {
 			fail("No se debería lanzar InvalidPositionException al invocar prev() o addBefore() con una posición válida en el testeo del método addBefore()");
 		} catch (BoundaryViolationException e2) {
 			fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista en el testeo del método addBefore()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO remove()________________________ */
+	 * _______________________TESTEAMOS EL METODO remove()________________________
+	 */
 
 	@Test
 	public void remove() {
 		Position<String> cursor;
 		int i = 5;
 		l.addFirst(n1);
-		cursor=null;
+		cursor = null;
 		try {
 			cursor = l.first();
 			// Caso de prueba: posición inválida, lista no vacía.
 			l.remove(null);
 			fail("Al invocar remove() con una posición inválida debería lanzarse la excepción InvalidPositionException");
 		} catch (InvalidPositionException e) {
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso de prueba: eliminar el único elemento de la lista
 		try {
 			l.remove(cursor);
@@ -760,14 +840,16 @@ public class ListTest {
 		// Inserto 5 elementos en la lista.
 		for (i = 1; i < 6; i++)
 			l.addLast(String.valueOf(i));
-		try {    
+		try {
 			cursor = l.first();
 			// CASO_DE_PRUEBA:Elimino el primer elemento de una lista no vacía.
 			l.remove(cursor);
 			cursor = l.first();
 		} catch (InvalidPositionException e) {
 			fail("remove() no debería lanzar la excepción InvalidPositionException con una posición válida.");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// verifico que la estructura sea correcta del principio hasta adelante.
 
 		try {
@@ -799,14 +881,18 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 2)
 				fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista testeando el método remove()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// CASO_DE_PRUEBA:Elimino el �ltimo elemento de una lista no vacía.
 		try {
 			cursor = l.last();
 			l.remove(cursor);
 		} catch (InvalidPositionException e) {
 			fail("remove() no debería lanzar la excepción InvalidPositionException con una posición válida");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// verifico que la estructura sea correcta del principio hasta el final.
 		try {
 			cursor = l.first();
@@ -822,7 +908,9 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 4)
 				fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista testeando el método remove()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		try {
 			// verifico que la estructura sea correcta hacia atrás
 			cursor = l.last();
@@ -836,9 +924,11 @@ public class ListTest {
 		} catch (InvalidPositionException e) {
 			fail("No se debería lanzar InvalidPositionException al invocar prev() con una posición válida testeando el método remove()");
 		} catch (BoundaryViolationException e2) {
-			if (i != 2) 				
+			if (i != 2)
 				fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista testeando el método remove()");
-		} catch (EmptyListException e2) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// CASO_DE_PRUEBA:Elimino el elemento del medio
 
 		try {
@@ -849,7 +939,9 @@ public class ListTest {
 			fail("remove() no debería lanzar la excepción InvalidPositionException con una posición válida");
 		} catch (BoundaryViolationException e) {
 			fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista testeando el método remove()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// verifico que la estructura sea correcta hacia adelante.
 		try {
 			cursor = l.first();
@@ -863,11 +955,14 @@ public class ListTest {
 		} catch (BoundaryViolationException e2) {
 			if (i != 4)
 				fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista testeando el método remove()");
-		} catch (EmptyListException e2) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e2) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO set()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO set()_____________________________
+	 */
 
 	@Test
 	public void set() {
@@ -875,14 +970,16 @@ public class ListTest {
 		Position<String> cursor;
 		String el, el2;
 		l.addFirst(n1);
-		cursor=null;
+		cursor = null;
 		try {
 			cursor = l.first();
 			// Caso de prueba: posición inválida, lista no vacía.
 			l.set(null, n2);
 			fail("Al invocar set() con una posición inválida debería lanzar la excepción InvalidPositionException");
 		} catch (InvalidPositionException e) {
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		// Caso de prueba: set el único elemento de la lista
 		try {
 			el = (String) l.set(cursor, n2);
@@ -924,7 +1021,9 @@ public class ListTest {
 		} catch (BoundaryViolationException e) {
 			if (i != 9999)
 				fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista testeando el método set()");
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		try {
 			cursor = l.first();
 			for (i = 11; i < 10010; i++) {
@@ -940,7 +1039,9 @@ public class ListTest {
 			if (i != 10009) {
 				fail("No se debería lanzar BoundaryViolationException al invocar next() con una posición distinta a la última posición de la lista testeando el método set()");
 			}
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 		try {
 			cursor = l.last();
 			for (i = 10009; i > 10; i--) {
@@ -955,15 +1056,19 @@ public class ListTest {
 		} catch (BoundaryViolationException e) {
 			if (i != 11)
 				fail("No se debería lanzar BoundaryViolationException al invocar prev() con una posición distinta a la primer posición de la lista testeando el método set()");
-		} catch (EmptyListException e) {fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la última posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 	}
 
 	/*
-	 * _______________________TESTEAMOS EL METODO iterator()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * iterator()_____________________________
+	 */
 
 	@Test
 	public void iterator() {
-		Set<String> C= new HashSet<String>();
+		Set<String> C = new HashSet<String>();
 		Iterator<String> it;
 		int i = 0;
 		it = l.iterator();
@@ -983,30 +1088,34 @@ public class ListTest {
 			}
 		} catch (InvalidPositionException e) {
 			fail("No se debería lanzar InvalidPositionException al invocar remove() con una posición válida testeando el método iterator()");
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_De_Prueba: Lista con mas de un elemento
-		for (i = 1; i < 10000; i++)
-		{l.addLast(String.valueOf(i));
-		C.add(String.valueOf(i));
+		for (i = 1; i < 10000; i++) {
+			l.addLast(String.valueOf(i));
+			C.add(String.valueOf(i));
 		}
 
 		it = l.iterator();
 		i = 1;
 		while (it.hasNext()) {
-			element=it.next();
+			element = it.next();
 			assertTrue("El iterador no funciona correctamente", C.contains(element));
-			assertTrue("El iterador no funciona correctamente", C.remove(element));		
+			assertTrue("El iterador no funciona correctamente", C.remove(element));
 			i++;
 		}
 		assertTrue("El iterador no recorre todos los elementos", C.isEmpty());
 	}
 	/*
-	 * _______________________TESTEAMOS EL METODO positions()_____________________________ */
+	 * _______________________TESTEAMOS EL METODO
+	 * positions()_____________________________
+	 */
 
 	@Test
 	public void positions() {
-		Set<Position<String>> C= new HashSet<Position<String>>();
+		Set<Position<String>> C = new HashSet<Position<String>>();
 		Iterator<Position<String>> it;
 		int i = 0;
 		it = l.positions().iterator();
@@ -1026,24 +1135,26 @@ public class ListTest {
 			}
 		} catch (InvalidPositionException e) {
 			fail("No se debería lanzar InvalidPositionException al invocar remove() con una posición válida testeando el método iterator()");
-		} catch (EmptyListException e) {fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");}
+		} catch (EmptyListException e) {
+			fail("Al solicitar la primer posición de una lista que no está vacía lanza la excepción EmptyListException");
+		}
 
 		// Caso_De_Prueba: Lista con mas de un elemento
-		for (i = 1; i < 10000; i++)
-		{l.addLast(String.valueOf(i));
-		try {
-			C.add(l.last());
-		} catch (EmptyListException e) {
-			fail("No se debería lanzar EmptyListException al invocar last() en una lista no vacía()");
-		}
+		for (i = 1; i < 10000; i++) {
+			l.addLast(String.valueOf(i));
+			try {
+				C.add(l.last());
+			} catch (EmptyListException e) {
+				fail("No se debería lanzar EmptyListException al invocar last() en una lista no vacía()");
+			}
 		}
 
 		it = l.positions().iterator();
 		i = 1;
 		while (it.hasNext()) {
-			element=it.next();
+			element = it.next();
 			assertTrue("El iterador no funciona correctamente", C.contains(element));
-			assertTrue("El iterador no funciona correctamente", C.remove(element));		
+			assertTrue("El iterador no funciona correctamente", C.remove(element));
 			i++;
 		}
 		assertTrue("El iterador no recorre todos los elementos", C.isEmpty());
