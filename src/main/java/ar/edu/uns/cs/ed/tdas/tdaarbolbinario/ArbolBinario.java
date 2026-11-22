@@ -3,163 +3,199 @@ package main.java.ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
 import java.util.Iterator;
 
 import main.java.ar.edu.uns.cs.ed.tdas.Position;
+import main.java.ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
+import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidOperationException;
+import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 
 public class ArbolBinario<E> implements BinaryTree<E> {
+    BTNodo<E> raiz;
+    int tamaño;
 
     @Override
     public Position<E> left(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'left'");
+        BTNodo<E> nodo = checkPosition(v);
+        if (nodo.getHijoIzq() == null) {
+            throw new BoundaryViolationException("El nodo no tiene hijo izquierdo");
+        }
+        return nodo.getHijoIzq();
     }
 
     @Override
     public Position<E> right(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'right'");
+        BTNodo<E> nodo = checkPosition(v);
+        if (nodo.getHijoDer() == null) {
+            throw new BoundaryViolationException("El nodo no tiene hijo derecho");
+        }
+        return nodo.getHijoDer();
     }
 
     @Override
     public boolean hasLeft(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasLeft'");
+        BTNodo<E> nodo = checkPosition(v);
+        return nodo.getHijoIzq() != null;
     }
 
     @Override
     public boolean hasRight(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasRight'");
+        BTNodo<E> nodo = checkPosition(v);
+        return nodo.getHijoDer() != null;
     }
 
     @Override
     public Position<E> addLeft(Position<E> v, E r) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addLeft'");
+        BTNodo<E> nodo = checkPosition(v);
+        if (nodo.getHijoIzq() != null) {
+            throw new InvalidOperationException("El nodo ya tiene hijo izquierdo");
+        }
+        BTNodo<E> nuevo = new BTNodo<>(r);
+        nuevo.setPadre(nodo);
+        nodo.setHijoIzq(nuevo);
+        tamaño++;
+        return nuevo;
     }
 
     @Override
     public Position<E> addRight(Position<E> v, E r) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addRight'");
+        BTNodo<E> nodo = checkPosition(v);
+        if (nodo.getHijoDer() != null) {
+            throw new InvalidOperationException("El nodo ya tiene hijo derecho");
+        }
+        BTNodo<E> nuevo = new BTNodo<>(r);
+        nuevo.setPadre(nodo);
+        nodo.setHijoDer(nuevo);
+        tamaño++;
+        return nuevo;
     }
 
     @Override
     public void attach(Position<E> v, BinaryTree<E> T1, BinaryTree<E> T2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'attach'");
+        BTNodo<E> hoja = checkPosition(v);
+        if (hoja.getHijoIzq() != null || hoja.getHijoDer() != null) {
+            throw new InvalidPositionException("La posición dada no es una hoja");
+        }
+        if (T1 != null && !T1.isEmpty()) {
+            BTNodo<E> raizT1 = (BTNodo<E>) ((ArbolBinario<E>) T1).raiz;
+            raizT1.setPadre(hoja);
+            hoja.setHijoIzq(raizT1);
+            tamaño += T1.size();
+            ((ArbolBinario<E>) T1).raiz = null;
+            ((ArbolBinario<E>) T1).tamaño = 0;
+        }
+        if (T2 != null && !T2.isEmpty()) {
+            BTNodo<E> raizT2 = (BTNodo<E>) ((ArbolBinario<E>) T2).raiz;
+            raizT2.setPadre(hoja);
+            hoja.setHijoDer(raizT2);
+            tamaño += T2.size();
+            ((ArbolBinario<E>) T2).raiz = null;
+            ((ArbolBinario<E>) T2).tamaño = 0;
+        }
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        return tamaño;
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return tamaño == 0;
     }
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Iterable<Position<E>> positions() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'positions'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public E replace(Position<E> v, E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'replace'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Position<E> root() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'root'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Position<E> parent(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'parent'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Iterable<Position<E>> children(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'children'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public boolean isInternal(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isInternal'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public boolean isExternal(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isExternal'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public boolean isRoot(Position<E> v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isRoot'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public void createRoot(E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createRoot'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Position<E> addFirstChild(Position<E> p, E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addFirstChild'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Position<E> addLastChild(Position<E> p, E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addLastChild'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Position<E> addBefore(Position<E> p, Position<E> rb, E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addBefore'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public Position<E> addAfter(Position<E> p, Position<E> lb, E e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAfter'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public void removeExternalNode(Position<E> p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeExternalNode'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public void removeInternalNode(Position<E> p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeInternalNode'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
     @Override
     public void removeNode(Position<E> p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeNode'");
+        throw new UnsupportedOperationException("Método inválido para BinaryTree");
     }
 
+    private BTNodo<E> checkPosition(Position<E> p) {
+        BTNodo<E> toRet;
+        try {
+            toRet = (BTNodo<E>) p;
+            if (toRet.getPadre() == toRet) {
+                throw new InvalidPositionException("Posición inválida");
+            }
+        } catch (ClassCastException e) {
+            throw new ClassCastException("La posición no pertenece a un árbol binario");
+        }
+        return toRet;
+    }
 }

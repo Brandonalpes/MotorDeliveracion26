@@ -1,114 +1,119 @@
-import Excepciones.InvalidKeyException;
-import java.security.Key;
+package main.java.ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
-import Repositorio.Entry;
+import main.java.ar.edu.uns.cs.ed.tdas.Entrada;
+import main.java.ar.edu.uns.cs.ed.tdas.Entry;
+import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
 
-public class TDADiccionario<K,V> implements Dictionary<K,V> {
+import main.java.ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
+import main.java.ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+
+public class TDADiccionario<K, V> implements Dictionary<K, V> {
     private K key;
     private V value;
     private int tamaño;
-    private PositionList<Entrada<K,V>>[] buckets;
+    private PositionList<Entrada<K, V>>[] buckets;
     private static final float fc = 0.0f;
-
-    
 
     @Override
     public int size() {
         return tamaño;
     }
+
     @Override
     public boolean isEmpty() {
-        return tamaño==0;
+        return tamaño == 0;
     }
+
     @Override
     public Entry<K, V> find(K key) {
-
+        if (key == null) {
+            throw new InvalidKeyException("Clave inválida");
+        }
+        int idx = CodigoHash(key);
+        if (buckets[idx] == null) {
+            return null;
+        }
+        for (Entrada<K, V> entrada : buckets[idx]) {
+            if (entrada.getKey().equals(key)) {
+                return entrada;
+            }
+        }
+        return null;
     }
+
     @Override
     public Iterable<Entry<K, V>> findAll(K key) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        if (key == null) {
+            throw new InvalidKeyException("Clave inválida");
+        }
+        PositionList<Entry<K, V>> resultado = new ListaDoblementeEnlazada<>();
+        int idx = CodigoHash(key);
+        if (buckets[idx] != null) {
+            for (Entrada<K, V> entrada : buckets[idx]) {
+                if (entrada.getKey().equals(key)) {
+                    resultado.addLast(entrada);
+                }
+            }
+        }
+        return resultado;
     }
+
     @Override
     public Entry<K, V> insert(K key, V value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+        if (key == null) {
+            throw new InvalidKeyException("Clave inválida");
+        }
+        int idx = CodigoHash(key);
+        if (buckets[idx] == null) {
+            buckets[idx] = new ListaDoblementeEnlazada<>();
+        }
+        Entrada<K, V> nueva = new Entrada<>(key, value);
+        buckets[idx].addLast(nueva);
+        tamaño++;
+        return nueva;
     }
+
     @Override
     public Entry<K, V> remove(Entry<K, V> e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        if (e == null) {
+            throw new InvalidKeyException("Entrada inválida");
+        }
+        int idx = CodigoHash(e.getKey());
+        if (buckets[idx] != null) {
+            for (Entrada<K, V> entrada : buckets[idx]) {
+                if (entrada.equals(e)) {
+                    PositionList<Entry<K, V>> aux = new ListaDoblementeEnlazada<>();
+                    for (Entrada<K, V> otro : buckets[idx]) {
+                        if (!otro.equals(e)) {
+                            aux.addLast(otro);
+                        }
+                    }
+                    buckets[idx] = new ListaDoblementeEnlazada<>();
+                    for (Entry<K, V> otro : aux) {
+                        buckets[idx].addLast((Entrada<K, V>) otro);
+                    }
+                    tamaño--;
+                    return entrada;
+                }
+            }
+        }
+        return null;
     }
+
     @Override
     public Iterable<Entry<K, V>> entries() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'entries'");
-    }
-
-    private int CodigoHash(K key){
-        return Math.abs(k.hashCode())/buckets.length;
-    }
-
-    //------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------
-
-    public boolean ClavesIguales(K k1, K k2){
-        //-----------------------------------------------------------------------------
-        // PARA ESTA IMPLEMENTACIÓN, SE ASUME QUE AMBAS CLAVES TIENEN SUS VALORES
-        // ORDENADOS DENTRO DE SUS RESPECTIVOS BUCKETS
-        //-----------------------------------------------------------------------------
-        TDAPila aux1 = new TDAPila();
-        TDAPila aux2 = new TDAPila();
-        boolean toRet=true;
-        for (Entrada entry1: buckets[CodigoHash(k1)]){
-            if (entry1.getKey().equals(k1)){
-                if (aux1.isEmpty()){
-                    aux1.push(entry1.getValue());
-                } else {
-                    if (!aux1.top().equals(entry1.getValue())){
-                        aux1.push(entry1.getValue());
-                    }
+        PositionList<Entry<K, V>> resultado = new ListaDoblementeEnlazada<>();
+        for (PositionList<Entrada<K, V>> bucket : buckets) {
+            if (bucket != null) {
+                for (Entrada<K, V> entrada : bucket) {
+                    resultado.addLast(entrada);
                 }
             }
         }
-        for (Entrada entry2: buckets[CodigoHash(k2)]){
-            if (entry2.getKey().equals(k2)){
-                if (aux2.isEmpty()){
-                    aux2.push(entry2.getValue());
-                } else {
-                    if (!aux2.top().equals(entry2.getValue())){
-                        aux2.push(entry2.getValue());
-                    }
-                }
-            }
-        }
-        if (aux1.size()!=aux2.size()){
-                toRet=false;
-            } 
-        while (toRet && !aux1.isEmpty() && !aux2.isEmpty()){
-            toRet=aux1.pop().equals(aux2.pop());
-        }
-        return toRet;
+        return resultado;
     }
 
-    //------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------------
-
-
-    public boolean contieneMasQue(K key, V value, int n) throws InvalidKeyException{
-        int i=0;
-        if (key==null){
-            throw new InvalidKeyException("llave nula");
-        }
-        for (Entrada entry : buckets[CodigoHash(key)]){
-            if (entry.getKey().equals(key) && entry.getValue().equals(value)){
-                i++;
-            }
-        }
-        return i>n;
+    private int CodigoHash(K key) {
+        return Math.abs(key.hashCode()) % buckets.length;
     }
 }
