@@ -1,6 +1,6 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdadiccionario;
+﻿package ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.Entry;
 
 /**
  * Interface Dictionary

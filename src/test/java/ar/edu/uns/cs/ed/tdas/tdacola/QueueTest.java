@@ -1,7 +1,7 @@
-package test.java.ar.edu.uns.cs.ed.tdas.tdacola;
+﻿package ar.edu.uns.cs.ed.tdas.tdacola;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.EmptyQueueException;
-import main.java.ar.edu.uns.cs.ed.tdas.tdacola.Queue;
+import ar.edu.uns.cs.ed.tdas.excepciones.EmptyQueueException;
+import ar.edu.uns.cs.ed.tdas.tdacola.Queue;
 
 import static org.junit.Assert.*;
 import org.junit.*;

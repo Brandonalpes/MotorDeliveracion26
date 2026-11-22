@@ -1,6 +1,6 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdapila;
+﻿package ar.edu.uns.cs.ed.tdas.tdapila;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
+import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
 
 public class TDAPila<E> implements Stack<E> {
     private int size;

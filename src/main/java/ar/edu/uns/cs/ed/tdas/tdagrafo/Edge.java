@@ -1,6 +1,6 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdagrafo;
+﻿package ar.edu.uns.cs.ed.tdas.tdagrafo;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.Position;
 
 /**
  * Interface Edge

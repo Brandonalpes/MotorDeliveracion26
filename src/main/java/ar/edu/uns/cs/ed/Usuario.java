@@ -1,4 +1,4 @@
-package main.java.ar.edu.uns.cs.ed;
+﻿package ar.edu.uns.cs.ed;
 
 public class Usuario {
     private String id;

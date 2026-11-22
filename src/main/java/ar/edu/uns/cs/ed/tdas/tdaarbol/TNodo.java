@@ -1,9 +1,9 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdaarbol;
+﻿package ar.edu.uns.cs.ed.tdas.tdaarbol;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
+import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
 
 public class TNodo<E> implements Position<E> {
     private E elemento;

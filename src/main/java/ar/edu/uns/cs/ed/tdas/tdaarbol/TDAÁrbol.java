@@ -1,15 +1,15 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdaarbol;
+﻿package ar.edu.uns.cs.ed.tdas.tdaarbol;
 
 import java.util.Iterator;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
-import main.java.ar.edu.uns.cs.ed.*;
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.*;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.EmptyTreeException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidOperationException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.NullPointerException;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.*;
+import ar.edu.uns.cs.ed.tdas.tdalista.*;
+import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
+import ar.edu.uns.cs.ed.tdas.excepciones.EmptyTreeException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidOperationException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
+import ar.edu.uns.cs.ed.tdas.excepciones.NullPointerException;
 
 public class TDAÁrbol<E> implements Tree<E> {
     private int tamaño;

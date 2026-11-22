@@ -3,14 +3,14 @@ package ar.edu.uns.cs.ed;
 import ar.edu.uns.cs.ed.tdas.Position;
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
-import ar.edu.uns.cs.ed.tdas.tdaarbol.Arbol;
+import ar.edu.uns.cs.ed.tdas.tdaarbol.TDAÁrbol;
 import ar.edu.uns.cs.ed.tdas.tdaarbol.Tree;
-import ar.edu.uns.cs.ed.tdas.tdadiccionario.DiccionarioHashAbierto;
+import ar.edu.uns.cs.ed.tdas.tdadiccionario.TDADiccionario;
 import ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
 import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
 import ar.edu.uns.cs.ed.tdas.tdamapeo.Map;
-import ar.edu.uns.cs.ed.tdas.tdamapeo.MapeoConHash;
-import ar.edu.uns.cs.ed.tdas.tdapila.PilaConLista;
+import ar.edu.uns.cs.ed.tdas.tdamapeo.TDAMapeo;
+import ar.edu.uns.cs.ed.tdas.tdapila.TDAPila;
 import ar.edu.uns.cs.ed.tdas.tdapila.Stack;
 
 /**
@@ -38,11 +38,11 @@ public class MotorDeliberacion {
      * 
      */
     public MotorDeliberacion() {
-        arbol = new Arbol<Opinion>();
-        nodos = new MapeoConHash<String, Position<Opinion>>();
-        opinionesDe = new MapeoConHash<String, PositionList<Opinion>>();
-        lugarEnUsuario = new MapeoConHash<String, Position<Opinion>>();
-        historial = new PilaConLista<Operaciones>();
+        arbol = new TDAÁrbol<Opinion>();
+        nodos = new TDAMapeo<String, Position<Opinion>>();
+        opinionesDe = new TDAMapeo<String, PositionList<Opinion>>();
+        lugarEnUsuario = new TDAMapeo<String, Position<Opinion>>();
+        historial = new TDAPila<Operaciones>();
     }
 
     /**
@@ -242,11 +242,11 @@ public class MotorDeliberacion {
 
     //limpia todo el debate, dejando la estructura vacía.   
     public void clearDebate() {
-        arbol = new Arbol<Opinion>();
-        nodos = new MapeoConHash<String, Position<Opinion>>();
-        opinionesDe = new MapeoConHash<String, PositionList<Opinion>>();
-        lugarEnUsuario = new MapeoConHash<String, Position<Opinion>>();
-        historial = new PilaConLista<Operaciones>();
+        arbol = new TDAÁrbol<Opinion>();
+        nodos = new TDAMapeo<String, Position<Opinion>>();
+        opinionesDe = new TDAMapeo<String, PositionList<Opinion>>();
+        lugarEnUsuario = new TDAMapeo<String, Position<Opinion>>();
+        historial = new TDAPila<Operaciones>();
     }
 
     //consultar por usuario, devuelve una lista de argumentos que pertenecen a ese usuario.
@@ -270,7 +270,7 @@ public class MotorDeliberacion {
             return;
         }
 
-        Stack<Operaciones> aux = new PilaConLista<Operaciones>();
+        Stack<Operaciones> aux = new TDAPila<Operaciones>();
         while (!historial.isEmpty()) {
             aux.push(historial.pop());
         }
@@ -291,18 +291,18 @@ public class MotorDeliberacion {
      * @return Un diccionario cuya clave es el ID del nodo y el valor es un diccionario con la polarización: 
      * "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
      */
-    public DiccionarioHashAbierto<String,DiccionarioHashAbierto<String,Integer>> calcularPolarizacionDebate(){
+    public TDADiccionario<String,TDADiccionario<String,Integer>> calcularPolarizacionDebate(){
         if (arbol.isEmpty()) {
             throw new IllegalStateException("no hay debate");
         }
-        DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>> dicGeneral = new DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>>();
+        TDADiccionario<String, TDADiccionario<String, Integer>> dicGeneral = new TDADiccionario<String, TDADiccionario<String, Integer>>();
 
         polarizacionDebateRec(arbol.root(), dicGeneral);
         return dicGeneral;
     }
 
     private int[] polarizacionDebateRec(Position<Opinion> v,
-            DiccionarioHashAbierto<String, DiccionarioHashAbierto<String, Integer>> dicGeneral) {
+            TDADiccionario<String, TDADiccionario<String, Integer>> dicGeneral) {
         int[] r = new int[2];
 
         for (Position<Opinion> h : arbol.children(v)) {
@@ -318,7 +318,7 @@ public class MotorDeliberacion {
             r[1]++;
         }
 
-        DiccionarioHashAbierto<String, Integer> dicNodo = new DiccionarioHashAbierto<String, Integer>();
+        TDADiccionario<String, Integer> dicNodo = new TDADiccionario<String, Integer>();
         dicNodo.insert("AFAVOR", r[0]);
         dicNodo.insert("ENCONTRA", r[1]);
 
@@ -333,7 +333,7 @@ public class MotorDeliberacion {
     * @param idNodo : Identificador del nodo para el cual se desea calcular la polarización.
     * @return Un DiccionarioHashAbierto<String,Integer> que contiene la polarización del nodo, con las claves "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
     */
-    public DiccionarioHashAbierto<String,Integer> calcularPolarizacionNodo(String idNodo){
+    public TDADiccionario<String,Integer> calcularPolarizacionNodo(String idNodo){
         if (arbol.isEmpty()) {
             throw new IllegalStateException("no hay debate");
         }
@@ -348,7 +348,7 @@ public class MotorDeliberacion {
 
         int[] cont = contarPol(p);
 
-        DiccionarioHashAbierto<String, Integer> res = new DiccionarioHashAbierto<String, Integer>();
+        TDADiccionario<String, Integer> res = new TDADiccionario<String, Integer>();
         res.insert("AFAVOR", cont[0]);
         res.insert("ENCONTRA", cont[1]);
         return res;

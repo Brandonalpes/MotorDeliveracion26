@@ -1,4 +1,4 @@
-package main.java.ar.edu.uns.cs.ed.tdas;
+﻿package ar.edu.uns.cs.ed.tdas;
 
 public class DNodo<E> implements Position<E> {
     private E element;

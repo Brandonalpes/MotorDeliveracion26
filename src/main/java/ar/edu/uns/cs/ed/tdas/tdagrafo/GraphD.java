@@ -1,7 +1,7 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdagrafo;
+﻿package ar.edu.uns.cs.ed.tdas.tdagrafo;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidEdgeException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidVertexException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidEdgeException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidVertexException;
 
 /**
  * Interface Grafo para grafos dirigidos.

@@ -1,4 +1,4 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdacola;
+﻿package ar.edu.uns.cs.ed.tdas.tdacola;
 
 public class TDACola<E> implements Queue<E> {
     private int size;

@@ -1,6 +1,6 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
+﻿package ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.Position;
 
 public class BTNodo<E> implements Position<E> {
 

@@ -1,13 +1,13 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdamapeo;
+﻿package ar.edu.uns.cs.ed.tdas.tdamapeo;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidEntryException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidEntryException;
 import java.util.Iterator;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
-import main.java.ar.edu.uns.cs.ed.tdas.Entrada;
-import main.java.ar.edu.uns.cs.ed.tdas.Entry;
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
+import ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
+import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import ar.edu.uns.cs.ed.tdas.Entrada;
+import ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.Position;
 
 public class TDAMapeo<K, V> implements Map<K, V> {
     private int N;

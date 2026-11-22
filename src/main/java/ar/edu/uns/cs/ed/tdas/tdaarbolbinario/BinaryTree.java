@@ -1,7 +1,7 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
+﻿package ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
-import main.java.ar.edu.uns.cs.ed.tdas.tdaarbol.Tree;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.tdaarbol.Tree;
 
 /**
  * Interface BinaryTree

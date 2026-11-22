@@ -1,11 +1,11 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
+﻿package ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
 
 import java.util.Iterator;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidOperationException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidOperationException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 
 public class ArbolBinario<E> implements BinaryTree<E> {
     BTNodo<E> raiz;

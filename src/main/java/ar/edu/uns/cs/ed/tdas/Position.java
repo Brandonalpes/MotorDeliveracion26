@@ -1,4 +1,4 @@
-package main.java.ar.edu.uns.cs.ed.tdas;
+﻿package ar.edu.uns.cs.ed.tdas;
 
 /**
  * Interface Position

@@ -1,4 +1,4 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdacola;
+﻿package ar.edu.uns.cs.ed.tdas.tdacola;
 
 /**
  * Interface Queue

@@ -1,4 +1,4 @@
-
+﻿
 /**
  * Class: StackTest
  * @author María Luján Ganuza (mlg@cs.uns.edu.ar)
@@ -7,13 +7,13 @@
  *  @version: 2.0
  */
 
-package test.java.ar.edu.uns.cs.ed.tdas.tdapila;
+package ar.edu.uns.cs.ed.tdas.tdapila;
 
 import org.junit.*; //For tags
 import static org.junit.Assert.*; //For assertions
 
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
-import main.java.ar.edu.uns.cs.ed.tdas.tdapila.Stack;
+import ar.edu.uns.cs.ed.tdas.tdapila.Stack;
 
 public class StackTest {
 	private Stack<String> s; // interface

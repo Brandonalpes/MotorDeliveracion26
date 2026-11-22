@@ -1,11 +1,11 @@
-package main.java.ar.edu.uns.cs.ed;
+﻿package ar.edu.uns.cs.ed;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
 
 public class ElementIterator<E> implements Iterator<E> {
     protected PositionList<E> list;

@@ -1,11 +1,11 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdalista;
+﻿package ar.edu.uns.cs.ed.tdas.tdalista;
 
 import java.util.Iterator;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
+import ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
+import ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 
 /**
  * Interface PositionList

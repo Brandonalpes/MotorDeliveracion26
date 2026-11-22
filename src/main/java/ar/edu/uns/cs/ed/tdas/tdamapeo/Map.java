@@ -1,6 +1,6 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdamapeo;
+﻿package ar.edu.uns.cs.ed.tdas.tdamapeo;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.Entry;
 
 /**
  * Interface Map

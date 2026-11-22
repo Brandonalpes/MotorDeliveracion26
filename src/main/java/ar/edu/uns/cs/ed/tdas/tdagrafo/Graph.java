@@ -1,4 +1,4 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdagrafo;
+﻿package ar.edu.uns.cs.ed.tdas.tdagrafo;
 
 /**
  * Interface Grafo para grafos NO dirigidos.

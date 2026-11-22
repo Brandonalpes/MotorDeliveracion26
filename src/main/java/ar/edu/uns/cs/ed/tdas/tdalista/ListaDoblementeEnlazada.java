@@ -1,11 +1,11 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdalista;
+﻿package ar.edu.uns.cs.ed.tdas.tdalista;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import java.util.Iterator;
 
-import main.java.ar.edu.uns.cs.ed.ElementIterator;
-import main.java.ar.edu.uns.cs.ed.tdas.DNodo;
-import main.java.ar.edu.uns.cs.ed.tdas.Position;
+import ar.edu.uns.cs.ed.ElementIterator;
+import ar.edu.uns.cs.ed.tdas.DNodo;
+import ar.edu.uns.cs.ed.tdas.Position;
 
 public class ListaDoblementeEnlazada<E> implements PositionList<E> {
     private int size;

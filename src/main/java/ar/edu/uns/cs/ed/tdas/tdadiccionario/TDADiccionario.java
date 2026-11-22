@@ -1,11 +1,11 @@
-package main.java.ar.edu.uns.cs.ed.tdas.tdadiccionario;
+﻿package ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
-import main.java.ar.edu.uns.cs.ed.tdas.Entrada;
-import main.java.ar.edu.uns.cs.ed.tdas.Entry;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
+import ar.edu.uns.cs.ed.tdas.Entrada;
+import ar.edu.uns.cs.ed.tdas.Entry;
+import ar.edu.uns.cs.ed.tdas.excepciones.InvalidKeyException;
 
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
-import main.java.ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
+import ar.edu.uns.cs.ed.tdas.tdalista.ListaDoblementeEnlazada;
+import ar.edu.uns.cs.ed.tdas.tdalista.PositionList;
 
 public class TDADiccionario<K, V> implements Dictionary<K, V> {
     private K key;
