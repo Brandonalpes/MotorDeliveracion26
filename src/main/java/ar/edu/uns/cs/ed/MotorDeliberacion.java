@@ -75,27 +75,24 @@ public class MotorDeliberacion {
  */
     public String deshacerUltimaOperacion() throws EmptyStackException {
         if (historial.isEmpty()) {
-            throw new EmptyStackException("no hay operaciones");
+            throw new EmptyStackException("No hay operaciones para deshacer");
         }
 
-        Operaciones opActual = historial.top();
-
+        // desapilo antes porque clearDebate reinicia la pila
+        Operaciones opActual = historial.pop();
 
         if (opActual.operacion == 1) {
             clearDebate();
-            historial.pop();
-            return "Se deshizo CREAR_DEBATE " + opActual.id;
+            return "Se deshizo CREAR_DEBATE: " + opActual.id;
         }
 
         Position<Opinion> pos = nodos.get(opActual.id);
-        if(pos == null) {
-            historial.pop();
-            throw new IllegalStateException("el posteo ya no existe");
+        if (pos == null) {
+            throw new IllegalStateException("No se pudo deshacer la operación POSTEAR: " + opActual.id);
         }
 
-        // TODO: reutilizar el borrado del subarbol aca sin chequear dueño
-        historial.pop();
-        return "Se deshizo POSTEAR " + opActual.id;
+        borrarSubarbol(pos);
+        return "Se deshizo POSTEAR: " + opActual.id;
     }
 /**
  * Crea un nuevo debate con un argumento raíz.
@@ -201,10 +198,19 @@ public class MotorDeliberacion {
             throw new IllegalStateException("solo el autor puede eliminar");
         }
 
+        if (arbol.isRoot(p)) {
+            clearDebate();
+            return;
+        }
 
+        borrarSubarbol(p);
+    }
+
+
+    private void borrarSubarbol(Position<Opinion> raizSub) {
         PositionList<String> listaIds = new ListaDoblementeEnlazada<String>();
         PositionList<Position<Opinion>> listaPos = new ListaDoblementeEnlazada<Position<Opinion>>();
-        obtenerIdsYPosicionesSubarbol(p, listaIds, listaPos);
+        obtenerIdsYPosicionesSubarbol(raizSub, listaIds, listaPos);
 
         Iterator<String> itIds = listaIds.iterator();
         Iterator<Position<Opinion>> itPos = listaPos.iterator();
@@ -212,7 +218,7 @@ public class MotorDeliberacion {
         while (itIds.hasNext()) {
             String idAct = itIds.next();
             Position<Opinion> posAct = itPos.next();
-            String idUsr = posAct.element().getUsuario().getId();
+            String idUsr = posAct.element().getUsuario().getId().trim();
 
             PositionList<Opinion> listaUsr = opinionesDe.get(idUsr);
             Position<Opinion> posEnLista = lugarEnUsuario.remove(idAct);
@@ -257,6 +263,28 @@ public class MotorDeliberacion {
         return lista;
     }
 
+
+
+    public void mostrarOperaciones() {
+        if (historial.isEmpty()) {
+            System.out.println("No hay operaciones");
+            return;
+        }
+
+        Stack<Operaciones> aux = new PilaConLista<Operaciones>();
+        while (!historial.isEmpty()) {
+            aux.push(historial.pop());
+        }
+
+        int i = 1;
+        while (!aux.isEmpty()) {
+            Operaciones op = aux.pop();
+            System.out.println(i + ") " + op.detalle + " - " + op.id);
+            historial.push(op);
+            i++;
+        }
+    }
+
     /**
      * Calcula la polarización de todos los nodos del debate.
      * La polarización se define como la cantidad de argumentos a favor y en contra que existen en el subárbol que tiene como raíz cada nodo.
@@ -265,7 +293,7 @@ public class MotorDeliberacion {
      * "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
      */
     public DiccionarioHashAbierto<String,DiccionarioHashAbierto<String,Integer>> calcularPolarizacionDebate(){
-        //TODO
+        // TODO: falta armarlo en una pasada postorden para que quede en O(n)
         return null;
     }
 
@@ -277,8 +305,39 @@ public class MotorDeliberacion {
     * @return Un DiccionarioHashAbierto<String,Integer> que contiene la polarización del nodo, con las claves "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
     */
     public DiccionarioHashAbierto<String,Integer> calcularPolarizacionNodo(String idNodo){
-        //TODO
-        return null;
+        if (idNodo == null) {
+            throw new IllegalArgumentException("id invalido");
+        }
+
+        Position<Opinion> p = nodos.get(idNodo.trim());
+        if (p == null) {
+            throw new IllegalArgumentException("no existe el nodo");
+        }
+
+        int[] cont = contarPol(p);
+        // System.out.println(idNodo + " -> " + cont[0] + " / " + cont[1]);
+
+        DiccionarioHashAbierto<String, Integer> res = new DiccionarioHashAbierto<String, Integer>();
+        res.insert("AFAVOR", cont[0]);
+        res.insert("ENCONTRA", cont[1]);
+        return res;
+    }
+
+    private int[] contarPol(Position<Opinion> v) {
+        int[] r = new int[2];
+        String post = v.element().getPostura();
+        if (post.equals("AFAVOR")) {
+            r[0]++;
+        } else if (post.equals("ENCONTRA")) {
+            r[1]++;
+        }
+
+        for (Position<Opinion> h : arbol.children(v)) {
+            int[] rh = contarPol(h);
+            r[0] += rh[0];
+            r[1] += rh[1];
+        }
+        return r;
     }
  /*** Mostrar árbol por consola ***/
  
