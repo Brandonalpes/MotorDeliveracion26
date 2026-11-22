@@ -376,11 +376,6 @@ public class MotorDeliberacionTest {
         motor.deshacerUltimaOperacion();
     }
 
-    // Tests del comportamiento esperado; hoy fallan por bugs (ver motivo en
-    // @Ignore).
-
-    // @Ignore("Bug: clearDebate() vacía la pila y luego top() lanza
-    // EmptyStackException")
     @Test
     public void deshacer_crearDebate_limpiaElDebate() throws Exception {
         MotorDeliberacion m = new MotorDeliberacion();
