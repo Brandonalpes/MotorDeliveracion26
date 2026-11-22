@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
+package ar.edu.uns.cs.ed.tdas.tdaarbolbinario;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

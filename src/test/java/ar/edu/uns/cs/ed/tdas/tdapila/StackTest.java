@@ -1,4 +1,4 @@
-﻿
+
 /**
  * Class: StackTest
  * @author María Luján Ganuza (mlg@cs.uns.edu.ar)

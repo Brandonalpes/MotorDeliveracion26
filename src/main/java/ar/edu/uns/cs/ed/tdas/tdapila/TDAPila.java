@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdapila;
+package ar.edu.uns.cs.ed.tdas.tdapila;
 
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyStackException;
 
@@ -35,11 +35,9 @@ public class TDAPila<E> implements Stack<E> {
     @Override
     public void push(E element) {
         if (size == pila.length) {
-            reOrdenar(pila);
-            pila[size] = element;
-        } else {
-            pila[size] = element;
+            reOrdenar();
         }
+        pila[size] = element;
         size++;
     }
 
@@ -55,7 +53,7 @@ public class TDAPila<E> implements Stack<E> {
         return aux;
     }
 
-    private void reOrdenar(E[] pila) {
+    private void reOrdenar() {
         E[] nuevaPila = (E[]) new Object[pila.length * 2];
         for (int i = 0; i < pila.length; i++) {
             nuevaPila[i] = pila[i];

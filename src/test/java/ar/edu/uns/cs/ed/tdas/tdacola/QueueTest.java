@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdacola;
+package ar.edu.uns.cs.ed.tdas.tdacola;
 
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyQueueException;
 import ar.edu.uns.cs.ed.tdas.tdacola.Queue;

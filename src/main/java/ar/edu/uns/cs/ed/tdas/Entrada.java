@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas;
+package ar.edu.uns.cs.ed.tdas;
 
 public class Entrada<K, V> implements Entry<K, V> {
     private K key;

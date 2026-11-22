@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdacolaconprioridad;
+package ar.edu.uns.cs.ed.tdas.tdacolaconprioridad;
 
 import ar.edu.uns.cs.ed.tdas.Entry;
 

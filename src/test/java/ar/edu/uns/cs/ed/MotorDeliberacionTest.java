@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed;
+package ar.edu.uns.cs.ed;
 
 import org.junit.Before;
 import org.junit.Test;

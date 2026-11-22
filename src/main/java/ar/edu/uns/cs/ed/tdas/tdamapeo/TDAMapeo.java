@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdamapeo;
+package ar.edu.uns.cs.ed.tdas.tdamapeo;
 
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidEntryException;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdalista;
+package ar.edu.uns.cs.ed.tdas.tdalista;
 
 import java.util.Iterator;
 

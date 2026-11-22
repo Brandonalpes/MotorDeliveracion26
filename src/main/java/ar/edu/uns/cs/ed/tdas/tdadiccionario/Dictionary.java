@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdadiccionario;
+package ar.edu.uns.cs.ed.tdas.tdadiccionario;
 
 import ar.edu.uns.cs.ed.tdas.Entry;
 

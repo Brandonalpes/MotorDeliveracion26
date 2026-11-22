@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed.tdas.tdalista;
+package ar.edu.uns.cs.ed.tdas.tdalista;
 
 import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
 import ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;

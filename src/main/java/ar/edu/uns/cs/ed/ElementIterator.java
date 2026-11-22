@@ -1,4 +1,4 @@
-﻿package ar.edu.uns.cs.ed;
+package ar.edu.uns.cs.ed;
 
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import java.util.Iterator;
