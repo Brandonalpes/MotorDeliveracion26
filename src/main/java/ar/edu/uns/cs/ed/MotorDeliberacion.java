@@ -73,7 +73,7 @@ public class MotorDeliberacion {
  * @throws EmptyStackException
  */
     public String deshacerUltimaOperacion() throws EmptyStackException {
-        //TODO: implementar en el proximo push
+        //TODO: Implementar la funcionalidad de deshacer la última operación registrada.
         return null;
     }
 /**
@@ -167,12 +167,12 @@ public class MotorDeliberacion {
 
     // Elimina un posteo y todo el subárbol.
     public void eliminarPosteo(String idUsuario, String idPosteo) {
-        //TODO: implementar en el proximo push
+        //TODO: Implementar la funcionalidad de eliminar un posteo y todo su subárbol en el debate.
     }
 
     //obtiene las posiciones en postorden.
     private void obtenerIdsYPosicionesSubarbol(Position<Opinion> nodo, PositionList<String> ids, PositionList<Position<Opinion>> posiciones) {
-        //TODO: implementar en el proximo push
+        //TODO: Implementar la funcionalidad de obtener los ids y posiciones de un subárbol en postorden.
     }
 
     //limpia todo el debate, dejando la estructura vacía.   
@@ -205,7 +205,7 @@ public class MotorDeliberacion {
      * "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
      */
     public DiccionarioHashAbierto<String,DiccionarioHashAbierto<String,Integer>> calcularPolarizacionDebate(){
-        //TODO: implementar en el proximo push
+        //TODO
         return null;
     }
 
@@ -217,7 +217,7 @@ public class MotorDeliberacion {
     * @return Un DiccionarioHashAbierto<String,Integer> que contiene la polarización del nodo, con las claves "AFAVOR" y "ENCONTRA" y sus respectivos conteos.
     */
     public DiccionarioHashAbierto<String,Integer> calcularPolarizacionNodo(String idNodo){
-        //TODO: implementar en el proximo push
+        //TODO
         return null;
     }
  /*** Mostrar árbol por consola ***/
