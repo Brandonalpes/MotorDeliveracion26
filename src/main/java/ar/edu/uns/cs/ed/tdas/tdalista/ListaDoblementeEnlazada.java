@@ -1,5 +1,7 @@
 ﻿package ar.edu.uns.cs.ed.tdas.tdalista;
 
+import ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
+import ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
 import ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import java.util.Iterator;
 
@@ -12,6 +14,14 @@ public class ListaDoblementeEnlazada<E> implements PositionList<E> {
     private DNodo<E> header;
     private DNodo<E> trailer;
 
+    public ListaDoblementeEnlazada() {
+        header = new DNodo<E>(null);
+        trailer = new DNodo<E>(null);
+        header.setNext(trailer);
+        trailer.setPrev(header);
+        size = 0;
+    }
+
     @Override
     public int size() {
         return size;
@@ -23,39 +33,55 @@ public class ListaDoblementeEnlazada<E> implements PositionList<E> {
     }
 
     public Position<E> first() {
+        if (isEmpty()) {
+            throw new EmptyListException("Lista vacía");
+        }
         return header.getNext();
     }
 
     @Override
     public Position<E> last() {
+        if (isEmpty()) {
+            throw new EmptyListException("Lista vacía");
+        }
         return trailer.getPrev();
     }
 
     public Position<E> next(Position<E> p) {
         DNodo<E> aux = checkPosition(p);
-        if (!(p instanceof DNodo)) {
-            throw new InvalidPositionException("El parámetro no es un DNodo");
+        if (aux.getNext() == trailer) {
+            throw new BoundaryViolationException("No hay siguiente posición");
         }
         return aux.getNext();
     }
 
     public Position<E> prev(Position<E> p) {
         DNodo<E> aux = checkPosition(p);
-        if (!(p instanceof DNodo)) {
-            throw new InvalidPositionException("El parámetro no es un DNodo");
+        if (aux.getPrev() == header) {
+            throw new BoundaryViolationException("No hay posición previa");
         }
         return aux.getPrev();
     }
 
     @Override
     public void addFirst(E element) {
-        header.setNext(new DNodo(element));
+        DNodo<E> nuevo = new DNodo<E>(element);
+        DNodo<E> primero = header.getNext();
+        nuevo.setNext(primero);
+        nuevo.setPrev(header);
+        header.setNext(nuevo);
+        primero.setPrev(nuevo);
         size++;
     }
 
     @Override
     public void addLast(E element) {
-        trailer.setPrev(new DNodo(element));
+        DNodo<E> nuevo = new DNodo<E>(element);
+        DNodo<E> ultimo = trailer.getPrev();
+        nuevo.setNext(trailer);
+        nuevo.setPrev(ultimo);
+        ultimo.setNext(nuevo);
+        trailer.setPrev(nuevo);
         size++;
     }
 
@@ -126,12 +152,12 @@ public class ListaDoblementeEnlazada<E> implements PositionList<E> {
     }
 
     public DNodo<E> checkPosition(Position<E> p) {
-        DNodo<E> aux = (DNodo) p;
-        if (!(p instanceof DNodo)) {
-            throw new IllegalArgumentException("Posición inválida");
+        if (p == null || !(p instanceof DNodo)) {
+            throw new InvalidPositionException("Posición inválida");
         }
-        if (aux.element() == null || (aux.getPrev() == null && aux.getNext() == null)) {
-            throw new IllegalArgumentException("Posición inválida");
+        DNodo<E> aux = (DNodo<E>) p;
+        if (aux.getPrev() == null || aux.getNext() == null) {
+            throw new InvalidPositionException("Posición inválida");
         }
         return aux;
     }

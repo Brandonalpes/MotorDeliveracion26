@@ -106,7 +106,7 @@ public class TDAÁrbol<E> implements Tree<E> {
                 throw new InvalidPositionException("Parámetro nulo");
             }
             aux = (TNodo) v;
-            if (aux.getHijos() != null) {
+            if (aux.getHijos() != null && !aux.getHijos().isEmpty()) {
                 LoEs = true;
             }
         } catch (ClassCastException e) {
@@ -123,7 +123,7 @@ public class TDAÁrbol<E> implements Tree<E> {
                 throw new InvalidPositionException("Parámetro nulo");
             }
             aux = (TNodo) v;
-            if (aux.getHijos() == null) {
+            if (aux.getHijos() == null || aux.getHijos().isEmpty()) {
                 LoEs = true;
             }
         } catch (ClassCastException e) {
@@ -170,6 +170,7 @@ public class TDAÁrbol<E> implements Tree<E> {
             }
             aux = (TNodo) p;
             nuevo = new TNodo(e);
+            nuevo.setPadre(aux);
             if (aux.getHijos() == null) {
                 aux.setHijos(new ListaDoblementeEnlazada<TNodo<E>>());
                 aux.getHijos().addFirst(nuevo);
@@ -198,6 +199,7 @@ public class TDAÁrbol<E> implements Tree<E> {
             }
             aux = (TNodo) p;
             nuevo = new TNodo(e);
+            nuevo.setPadre(aux);
             if (aux.getHijos() == null) {
                 aux.setHijos(new ListaDoblementeEnlazada<TNodo<E>>());
                 aux.getHijos().addLast(nuevo);
@@ -300,7 +302,7 @@ public class TDAÁrbol<E> implements Tree<E> {
             throw new EmptyTreeException("Árbol vacío");
         }
         TNodo<E> aux = checkPosition(p);
-        if (aux.getHijos() != null) {
+        if (aux.getHijos() != null && !aux.getHijos().isEmpty()) {
             throw new InvalidPositionException("El nodo no es hoja");
         }
         if (aux == raíz) {

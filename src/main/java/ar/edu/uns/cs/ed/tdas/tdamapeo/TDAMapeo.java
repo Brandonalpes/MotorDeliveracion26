@@ -137,6 +137,6 @@ public class TDAMapeo<K, V> implements Map<K, V> {
     }
 
     private int hash(K key) {
-        return Math.abs(key.hashCode() / N);
+        return Math.abs(key.hashCode() % N);
     }
 }

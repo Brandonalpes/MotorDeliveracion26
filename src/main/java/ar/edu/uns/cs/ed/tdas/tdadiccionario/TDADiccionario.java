@@ -14,6 +14,15 @@ public class TDADiccionario<K, V> implements Dictionary<K, V> {
     private PositionList<Entrada<K, V>>[] buckets;
     private static final float fc = 0.0f;
 
+    public TDADiccionario() {
+        int N = 11;
+        buckets = new PositionList[N];
+        for (int i = 0; i < N; i++) {
+            buckets[i] = new ListaDoblementeEnlazada<>();
+        }
+        tamaño = 0;
+    }
+
     @Override
     public int size() {
         return tamaño;
@@ -114,6 +123,6 @@ public class TDADiccionario<K, V> implements Dictionary<K, V> {
     }
 
     private int CodigoHash(K key) {
-        return Math.abs(key.hashCode()) % buckets.length;
+        return Math.abs(key.hashCode() % buckets.length);
     }
 }
