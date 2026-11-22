@@ -1,7 +1,5 @@
 package main.java.ar.edu.uns.cs.ed.tdas.tdalista;
 
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.BoundaryViolationException;
-import main.java.ar.edu.uns.cs.ed.tdas.excepciones.EmptyListException;
 import main.java.ar.edu.uns.cs.ed.tdas.excepciones.InvalidPositionException;
 import java.util.Iterator;
 
